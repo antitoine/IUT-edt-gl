@@ -24,7 +24,7 @@ interface Model
      * Chargement à partir de la base de donnée
      * @param $id Identifiant de la ligne à charger
      */
-    public function load($id);
+    public static function load($id);
 }
 
 /**
@@ -55,7 +55,7 @@ class App
             }
         } catch (Exception $e) {
             echo $e; // Pour le debug à retirer pour la prod
-            $view = new App_View('view_error_404.php'); // en cas de controller ou d'action inconnu ou encore un possible soulevement d'une exception dans une action
+            $view = new App_View('error_404.php'); // en cas de controller ou d'action inconnu,sinon un possible soulevement d'une exception dans une action
             $view->render(null);
         }
     }
