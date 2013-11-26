@@ -3,10 +3,10 @@
 class App_Mysql
 {
     protected static $_instance = null;
-    private $hostname = "";
-    private $login = "";
-    private $passwd ="";
-    private $base ="";
+    private $hostname = "infolimon.iutmontp.univ-montp2.fr";
+    private $login = "levanl";
+    private $passwd ="123456789";
+    private $base ="levanl";
     private $connect = null;
 
     public function getConnect()
