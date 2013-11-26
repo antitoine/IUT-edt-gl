@@ -16,16 +16,45 @@ body {
 
 /**************** HEADER ****************/
 
+
+header.connexion  {
+    background: url("../Images/fond-bandeau.gif") no-repeat scroll center top rgba(0, 0, 0, 0);
+    height: 125px;
+    width: 100%;
+}
+
+header.connexion > h1 {
+    color: #FFFFFF;
+    font-size: 1.5em;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 39px;
+    width: 630px;
+}
+
 /***************** MENU *****************/
 
 /**************** CONTENT ***************/
 
-#content {
+.connexion#content {
+    background: url("../Images/fond-content.gif") repeat-y scroll center top rgba(0, 0, 0, 0);
+    min-height: 250px;
+    width: 100%;
+}
 
+.connexion#content > div {
+    margin: 0 auto;
+    width: 643px;
+    padding: 10px;
 }
 
 /**************** FOOTER ****************/
 
+footer.connexion  {
+    background: url("../Images/barre-bas.gif") no-repeat scroll center center rgba(0, 0, 0, 0);
+    height: 14px;
+    width: 100%;
+}
 
 /****************************************/
 /***************** PAGE *****************/
