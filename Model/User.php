@@ -51,9 +51,26 @@ class Model_User implements Model
 	public static function verifierAuthentification($id,$mdp){
 		$ret=false;
 		$res = App_Mysql::getInstance()->query("SELECT identifiant FROM Personne WHERE identifiant='".App_Mysql::getInstance()->quote($id)."' AND mdp='".App_Mysql::getInstance()->quote($mdp)."';";
-		if($tuple = App_Mysql::getInstance()->fetchArray($res)) {
+		if(App_Mysql::getInstance()->fetchArray($res)) {
 			$ret=true;
 		}
 		return $ret;
 	}
+	
+	public function getId(){ return $this->id; }
+	public function getEmail(){ return $this->email; }
+	public function getNom(){ return $this->nom; }
+	public function getPrenom(){ return $this->prenom; }
+	public function getMdp(){ return $this->mdp; }
+	public function getType(){ return $this->type; }
+	public function getIdGrp(){ return $this->idGrp; }
+	
+	public function setId($s){ $this->id=$s; }
+	public function setEmail($s){ $this->email=$s; }
+	public function setNom($s){ $this->nom=$s; }
+	public function setPrenom($s){ $this->prenom=$s; }
+	public function setMdp($s){ $this->mdp=$s; }
+	public function setType($s){ $this->type=$s; }
+	public function setIdGrp($s){ $this->idGrp=$s; }
+	
 }
