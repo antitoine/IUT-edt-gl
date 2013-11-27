@@ -15,7 +15,7 @@ class Model_Batiment implements Model
 	}
 	
 	public function save() {
-		$res = App_Mysql::getInstance()->query("SELECT nom FROM Batiment WHERE nom='".App_Mysql::getInstance()->quote($this->nom)."';";
+		$res = App_Mysql::getInstance()->query("SELECT nom FROM Batiment WHERE nom='".App_Mysql::getInstance()->quote($this->nom)."';");
 		if(App_Mysql::getInstance()->fetchArray($res)) {
 			$res = App_Mysql::getInstance()->query("UPDATE Batiment SET adresse='".mysql_real_escape_string($this->adresse)."' WHERE nom='".$this->nom."';");
 		}
@@ -29,7 +29,7 @@ class Model_Batiment implements Model
 	// return null si aucun batiment n'a ce nom sinon une instance de la classe Batiment
 	public static function load($nom) {
 		$ret=null;
-		$res = App_Mysql::getInstance()->query("SELECT * FROM Batiment WHERE nom='".App_Mysql::getInstance()->quote($nom)."';";
+		$res = App_Mysql::getInstance()->query("SELECT * FROM Batiment WHERE nom='".App_Mysql::getInstance()->quote($nom)."';");
 		if($tuple = App_Mysql::getInstance()->fetchArray($res)) {
 			$ret=new Batiment($tuple["nom"],$tuple["adresse"]);
 		}
