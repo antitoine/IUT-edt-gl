@@ -51,4 +51,8 @@ class App_Mysql
         }
         return $req;
     }
+
+    public static function fetchArray($res) {
+        return mysql_fetch_array($res);
+    }
 }

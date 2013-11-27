@@ -15,72 +15,50 @@ class Controller_Index implements Controller
     {
         $user = self::verifierSession();
         if (is_null($user)) {
-            if (!empty(trim(App_Request::getParam("identifiant")))) {
+            if (!empty(trim(App_Request::getParam("identifiant"))) && !empty(trim(App_Request::getParam("mdp")))) {
                 $identifiant = trim(App_Request::getParam("identifiant"));
-                if (Model_User::VerifierPseudo($identifiant)) {
-                    $mdp = md5(trim(App_Request::getParam("mdp")));
-                    $user = Model_User::VerifierAuth($identifiant,$mdp);
-                    if (empty(trim(App_Request::getParam("mdp")))) {
-                        $var = array(
-                            "identifiant" => $identifiant,
-                            "non_verifie" => false,
-                            "comb_prob" => false,
-                            "identifiant_prob" => false,
-                            "mdp_prob" => true
-                        );
-                        $view = new App_View('connexion.php');
-                        $view->render($var);
-                    } else if (is_null($user)) {
-                        $var = array(
-                            "identifiant" => $identifiant,
-                            "non_verifie" => false,
-                            "comb_prob" => true,
-                            "identifiant_prob" => false,
-                            "mdp_prob" => false
-                        );
-                        $view = new App_View('connexion.php');
-                        $view->render($var);
-                    } else if (!$user->getVerifier()) {
-                        $var = array(
-                            "identifiant" => $identifiant,
-                            "non_verifie" => true,
-                            "comb_prob" => false,
-                            "identifiant_prob" => false,
-                            "mdp_prob" => false
-                        );
-                        $view = new App_View('connexion.php');
-                        $view->render($var);
-                    } else {
-                        $var = array(
-                            "user" => $user
-                        );
-                        $_SESSION['id'] = $user->getId();
-                        $this->moncompteAction();
-                    }
-                } else {
+                $mdp_not_crypt = trim(App_Request::getParam("mdp"));
+                $mdp = md5($mdp_not_crypt);
+                if (!Model_User::VerifierAuthentification($identifiant,$mdp)) {
                     $var = array(
-                        "identifiant" => "",
-                        "non_verifie" => false,
-                        "comb_prob" => false,
-                        "identifiant_prob" => true,
-                        "mdp_prob" => false
+                        "identifiant" => $identifiant,
+                        "comb_prob" => true
                     );
                     $view = new App_View('connexion.php');
                     $view->render($var);
+                } else {
+                    $_SESSION['id'] = $identifiant;
+                    $this->moncompteAction();
                 }
             } else {
                 $var = array(
                     "identifiant" => "",
-                    "non_verifie" => false,
-                    "comb_prob" => false,
-                    "identifiant_prob" => false,
-                    "mdp_prob" => false
+                    "comb_prob" => false
                 );
                 $view = new App_View('connexion.php');
                 $view->render($var);
             }
         } else {
             $this->moncompteAction();
+        }
+    }
+
+    public function deconnexionAction($why = null)
+    {
+        App_Session::destroy($why);
+    }
+
+    public function moncompteAction()
+    {
+        $user = self::verifierSession();
+        if (!is_null($user)) {
+            $var = array(
+                "user" => $user
+            );
+            $view = new App_View('moncompte.php');
+            $view->render($var);
+        } else {
+            header ('Location: '.App_Request::getUrl());
         }
     }
 }
