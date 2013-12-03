@@ -2,7 +2,7 @@
 class Model_Etudiant extends Model_User implements Model
 {
 	// Attribut:
-	private $idGrp; // int, 0=étudiant, 1=prof, 2=admin
+	private $idGrp;
 	
 	/**
 	* Constructeur d'un etud
