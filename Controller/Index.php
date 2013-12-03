@@ -52,6 +52,7 @@ class Controller_Index implements Controller
     {
         $user = self::verifierSession();
         if (!is_null($user)) {
+            if ($user->getId())
             $var = array(
                 "user" => $user
             );
