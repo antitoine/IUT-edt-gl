@@ -9,7 +9,7 @@ class Model_Etudiant extends Model_User implements Model
 	* @param 
 	*/
 	public function __construct ($id=null,$email=null,$nom=null,$prenom=null,$mdp=null,$type=null,$idGrp=null) {
-		$super($id,$email,$nom,$prenom,$mdp,$type);
+		parent::__construct($id,$email,$nom,$prenom,$mdp,$type);
 		$this->idGrp=$idGrp;
 	}
 	
@@ -20,11 +20,11 @@ class Model_Etudiant extends Model_User implements Model
 		$super->save();
 		$res = App_Mysql::getInstance()->query("SELECT * FROM Etudiant WHERE idEtud='".App_Mysql::getInstance()->quote($this->id)."'");
 		if($tuple = App_Mysql::getInstance()->fetchArray($res)) {
-			$res = App_Mysql::getInstance()->query("UPDATE Etudiant SET idGroup='".mysql_real_escape_string($this->idGroup)."' WHERE idEtud='".$this->id."';");
+			$res = App_Mysql::getInstance()->query("UPDATE Etudiant SET idGroupe='".mysql_real_escape_string($this->idGroup)."' WHERE idEtud='".$this->id."';");
 		}
 		else{
 			if($this->idGrp!=null){
-				$res = App_Mysql::getInstance()->query("INSERT INTO Etudiant (idEtud,idGroup) VALUES('".App_Mysql::getInstance()->quote($this->idEtud)."','".App_Mysql::getInstance()->quote($this->idGrp)."')");
+				$res = App_Mysql::getInstance()->query("INSERT INTO Etudiant (idEtud,idGroupe) VALUES('".App_Mysql::getInstance()->quote($this->idEtud)."','".App_Mysql::getInstance()->quote($this->idGrp)."')");
 			}
 		}
 	}
@@ -34,9 +34,9 @@ class Model_Etudiant extends Model_User implements Model
 	*/
 	public static function load($id) {
 		$ret=null;
-		$res = App_Mysql::getInstance()->query("SELECT * FROM Personne p, Etudiant e WHERE p.identifiant='".App_Mysql::getInstance()->quote($id)."' AND e.idEtud='".App_Mysql::getInstance()->quote($id)."'");
+		$res = App_Mysql::getInstance()->query("SELECT p.identifiant AS identifiant, p.email AS email, p.nom AS nom, p.prenom AS prenom, p.mdp AS mdp, p.droit AS droit, e.idGroupe AS idGroup FROM Personne p, Etudiant e WHERE p.identifiant='".App_Mysql::getInstance()->quote($id)."' AND e.idEtud='".App_Mysql::getInstance()->quote($id)."'");
 		if($tuple = App_Mysql::getInstance()->fetchArray($res)) {
-			$ret=new Model_Etudiant($tuple["p.identifiant"],$tuple["p.email"],$tuple["p.nom"],$tuple["p.prenom"],$tuple["p.mdp"],$tuple["p.droit"],$tuple["e.idGroup"]);
+			$ret=new Model_Etudiant($tuple["identifiant"],$tuple["email"],$tuple["nom"],$tuple["prenom"],$tuple["mdp"],$tuple["droit"],$tuple["idGroup"]);
 		}
 		return $ret;
 	}
