@@ -8,27 +8,25 @@ class Model_User implements Model
 	private $prenom;
 	private $mdp; // crypté
 	private $type; // int, 0=étudiant, 1=prof, 2=admin
-	private $idGrp;
 	
 	/**
 	* Constructeur d'un utilisateur 
 	* @param 
 	*/
-	public function __construct ($id=null,$email=null,$nom=null,$prenom=null,$mdp=null,$type=null,$idGrp=null) {
+	public function __construct ($id=null,$email=null,$nom=null,$prenom=null,$mdp=null,$type=null) {
 		$this->id=$id;
 		$this->email=$email;
 		$this->nom=$nom;
 		$this->prenom=$prenom;
 		$this->mdp=$mdp;
 		$this->type=$type;
-		$this->idGrp=$idGrp;
 	}
 	
 
 	public function save() {
 		$res = App_Mysql::getInstance()->query("SELECT id FROM Personne WHERE identifiant='".App_Mysql::getInstance()->quote($this->id)."'");
 		if($tuple = App_Mysql::getInstance()->fetchArray($res)) {
-			$res = App_Mysql::getInstance()->query("UPDATE Personne SET email='".mysql_real_escape_string($this->email)."', nom='".mysql_real_escape_string($this->nom)."', prenom='".$this->prenom."', mdp='".mysql_real_escape_string($this->mdp)."', droit='".mysql_real_escape_string($this->type)."', idGrp='".mysql_real_escape_string($this->idGrp)."' WHERE identifiant='".$this->id."';");
+			$res = App_Mysql::getInstance()->query("UPDATE Personne SET email='".mysql_real_escape_string($this->email)."', nom='".mysql_real_escape_string($this->nom)."', prenom='".$this->prenom."', mdp='".mysql_real_escape_string($this->mdp)."', droit='".mysql_real_escape_string($this->type)."' WHERE identifiant='".$this->id."';");
 		}
 		else{
 			if($this->id!=null && $this->email!=null && $this->nom!=null && $this->prenom!=null && $this->mdp!=null && $this->type!=null){
@@ -42,7 +40,7 @@ class Model_User implements Model
 		$ret=null;
 		$res = App_Mysql::getInstance()->query("SELECT * FROM Personne WHERE identifiant='".App_Mysql::getInstance()->quote($id)."'");
 		if($tuple = App_Mysql::getInstance()->fetchArray($res)) {
-			$ret=new User($tuple["identifiant"],$tuple["email"],$tuple["nom"],$tuple["prenom"],$tuple["mdp"],$tuple["droit"],$tuple["idGrp"]);
+			$ret=new User($tuple["identifiant"],$tuple["email"],$tuple["nom"],$tuple["prenom"],$tuple["mdp"],$tuple["droit"]);
 		}
 		return $ret;
 	}
@@ -63,7 +61,6 @@ class Model_User implements Model
 	public function getPrenom(){ return $this->prenom; }
 	public function getMdp(){ return $this->mdp; }
 	public function getType(){ return $this->type; }
-	public function getIdGrp(){ return $this->idGrp; }
 	
 	public function setId($s){ $this->id=$s; }
 	public function setEmail($s){ $this->email=$s; }
@@ -71,6 +68,4 @@ class Model_User implements Model
 	public function setPrenom($s){ $this->prenom=$s; }
 	public function setMdp($s){ $this->mdp=$s; }
 	public function setType($s){ $this->type=$s; }
-	public function setIdGrp($s){ $this->idGrp=$s; }
-	
 }
