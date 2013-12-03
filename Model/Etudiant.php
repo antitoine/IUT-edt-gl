@@ -28,7 +28,7 @@ class Model_Etudiant extends Model_User implements Model
 			}
 		}
 	}
-	
+
 	/**
 	* return null si aucun user n'a cet id sinon une instance de la classe User
 	*/
@@ -36,7 +36,7 @@ class Model_Etudiant extends Model_User implements Model
 		$ret=null;
 		$res = App_Mysql::getInstance()->query("SELECT * FROM Personne p, Etudiant e WHERE p.identifiant='".App_Mysql::getInstance()->quote($id)."' AND e.idEtud='".App_Mysql::getInstance()->quote($id)."'");
 		if($tuple = App_Mysql::getInstance()->fetchArray($res)) {
-			$ret=new Etudiant($tuple["p.identifiant"],$tuple["p.email"],$tuple["p.nom"],$tuple["p.prenom"],$tuple["p.mdp"],$tuple["p.droit"],$tuple["e.idGroup"]);
+			$ret=new Model_Etudiant($tuple["p.identifiant"],$tuple["p.email"],$tuple["p.nom"],$tuple["p.prenom"],$tuple["p.mdp"],$tuple["p.droit"],$tuple["e.idGroup"]);
 		}
 		return $ret;
 	}
