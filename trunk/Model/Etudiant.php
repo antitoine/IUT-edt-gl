@@ -9,7 +9,7 @@ class Model_Etudiant extends Model_User implements Model
 	* @param 
 	*/
 	public function __construct ($id=null,$email=null,$nom=null,$prenom=null,$mdp=null,$type=null,$idGrp=null) {
-		$super($id,$email,$nom,$prenom,$mdp,$type)
+		$super($id,$email,$nom,$prenom,$mdp,$type);
 		$this->idGrp=$idGrp;
 	}
 	
