@@ -14,7 +14,7 @@ class Model_Cours implements Model
         private $grp;
         private $idProf;
        
-        
+       
         public function __construct( $idCours=null,$idProf= null,$nomMatiere= null,$grp= null,$numSalle= null,$nomBat= null, $heureDeb= null,$heureFin= null,$date= null,$descrip = null){
                 $this->idCours =$idCours;
                 $this->descrip =$descrip;      
