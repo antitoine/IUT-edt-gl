@@ -3,17 +3,9 @@
 class Controller_Index implements Controller
 {
 
-    public static function verifierSession()  {
-        if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
-            return Model_User::load($_SESSION['id']);
-        } else {
-            return null;
-        }
-    }
-
     public function indexAction() // Controller par defaut -> Permet la connexion
     {
-        $user = self::verifierSession();
+        $user = App_Session::verifierSession();
         if (is_null($user)) {
             if (!empty(trim(App_Request::getParam("identifiant"))) && !empty(trim(App_Request::getParam("mdp")))) {
                 $identifiant = trim(App_Request::getParam("identifiant"));
@@ -50,7 +42,7 @@ class Controller_Index implements Controller
 
     public function moncompteAction()
     {
-        $user = self::verifierSession();
+        $user = App_Session::verifierSession();
         if (!is_null($user)) {
             if ($user->getType() == 0) {
                 $user = Model_Etudiant::load($user->getId());

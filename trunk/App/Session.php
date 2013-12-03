@@ -16,4 +16,12 @@ class App_Session
             header ('Location: '.App_Request::getUrl());
         }
     }
+
+    public static function verifierSession()  {
+        if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
+            return Model_User::load($_SESSION['id']);
+        } else {
+            return null;
+        }
+    }
 }
