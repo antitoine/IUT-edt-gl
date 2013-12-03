@@ -15,7 +15,7 @@ class Model_Cours implements Model
         private $idProf;
        
         
-        public __Construct( $idCours=null,$idProf= null,$nomMatiere= null,$grp= null,$numSalle= null,$nomBat= null, $heureDeb= null,$heureFin= null,$date= null,$descrip = null){
+        public function __construct( $idCours=null,$idProf= null,$nomMatiere= null,$grp= null,$numSalle= null,$nomBat= null, $heureDeb= null,$heureFin= null,$date= null,$descrip = null){
                 $this->idCours =$idCours;
                 $this->descrip =$descrip;      
                 $this->numSalle =$numSalle;
@@ -52,3 +52,4 @@ class Model_Cours implements Model
         
         
 }
+?>
