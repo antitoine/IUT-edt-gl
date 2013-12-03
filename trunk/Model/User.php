@@ -40,7 +40,7 @@ class Model_User implements Model
 		$ret=null;
 		$res = App_Mysql::getInstance()->query("SELECT * FROM Personne WHERE identifiant='".App_Mysql::getInstance()->quote($id)."'");
 		if($tuple = App_Mysql::getInstance()->fetchArray($res)) {
-			$ret=new User($tuple["identifiant"],$tuple["email"],$tuple["nom"],$tuple["prenom"],$tuple["mdp"],$tuple["droit"]);
+			$ret=new Model_User($tuple["identifiant"],$tuple["email"],$tuple["nom"],$tuple["prenom"],$tuple["mdp"],$tuple["droit"]);
 		}
 		return $ret;
 	}
