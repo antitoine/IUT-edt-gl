@@ -19,7 +19,7 @@ class Controller_Consultation implements Controller
 	public function consultationRecherche()
 	{
 		if(!empty(trim(App_Request::getParam("submit")))){
-			if(!empty(trim(App_Request::getParam("id_user"))){
+			if(!empty(trim(App_Request::getParam("id_user")))){
 				$edt = App_EmploiDuTemps::searchByUser(App_Request::getParam("id_user"));
 				if(!is_null($edt)){
 					$var = array(
