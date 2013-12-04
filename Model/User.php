@@ -26,7 +26,7 @@ class Model_User implements Model
 	public function save() {
 		$res = App_Mysql::getInstance()->query("SELECT id FROM Personne WHERE identifiant='".App_Mysql::getInstance()->quote($this->id)."'");
 		if($tuple = App_Mysql::getInstance()->fetchArray($res)) {
-			$res = App_Mysql::getInstance()->query("UPDATE Personne SET email='".mysql_real_escape_string($this->email)."', nom='".mysql_real_escape_string($this->nom)."', prenom='".$this->prenom."', mdp='".mysql_real_escape_string($this->mdp)."', droit='".mysql_real_escape_string($this->type)."' WHERE identifiant='".$this->id."';");
+			$res = App_Mysql::getInstance()->query("UPDATE Personne SET email='".mysql_real_escape_string($this->email)."', nom='".mysql_real_escape_string($this->nom)."', prenom='".mysql_real_escape_string($this->prenom)."', mdp='".mysql_real_escape_string($this->mdp)."', droit='".mysql_real_escape_string($this->type)."' WHERE identifiant='".$this->id."';");
 		}
 		else{
 			if($this->id!=null && $this->email!=null && $this->nom!=null && $this->prenom!=null && $this->mdp!=null && $this->type!=null){
