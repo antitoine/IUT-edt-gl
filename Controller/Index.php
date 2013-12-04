@@ -48,7 +48,8 @@ class Controller_Index implements Controller
                 $user = Model_Etudiant::load($user->getId());
             }
             $var = array(
-                "user" => $user
+                "user" => $user,
+                "admin" => $user->getType() > 0;
             );
             $view = new App_View('moncompte.php');
             $view->render($var);
