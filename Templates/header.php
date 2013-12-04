@@ -19,10 +19,10 @@
                 <h3 id="title-menu">Menu</h3>
                 <div id="menu-connexion-contener" class="menu-connexion-contener">
                     <div>
-                    <ul id="menu-connexion">
+                        <ul id="menu-connexion">
                             <li><a href="<?php echo App_Request::getUrl('Index','deconnexion'); ?>">Déconnexion</a></li>
-                            <li><a href="<?php echo App_Request::getUrl('compte','moncompte'); ?>">Mon compte</a></li>
-                    </ul>
+                            <li><a href="<?php echo App_Request::getUrl('mesinfos'); ?>">Mon compte</a></li>
+                        </ul>
                     </div>
                 </div>
                 <div id="menu-principal-contener" class="menu-principal-contener">
