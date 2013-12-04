@@ -2,35 +2,35 @@
 
 class Controller_Consultation implements Controller
 {
-    public function indexAction() // Controller par defaut -> Permet la connexion
-    {
-    	$user = App_Session::verifierSession();
-        if (is_null($user)) {
-            if (!empty(trim(App_Request::getParam("identifiant"))) && !empty(trim(App_Request::getParam("mdp")))) {
-                $identifiant = trim(App_Request::getParam("identifiant"));
-                $mdp_not_crypt = trim(App_Request::getParam("mdp"));
-                $mdp = md5($mdp_not_crypt);
-                if (!Model_User::VerifierAuthentification($identifiant,$mdp)) {
-                    $var = array(
-                        "identifiant" => $identifiant,
-                        "comb_prob" => true
-                    );
-                    $view = new App_View('consultationRecherche.php');
-                    $view->render($var);
-                } else {
-                    $_SESSION['id'] = $identifiant;
-                    $this->moncompteAction();
-                }
-            } else {
-                $var = array(
-                    "identifiant" => "",
-                    "comb_prob" => false
-                );
-                $view = new App_View('connexion.php');
-                $view->render($var);
-            }
-        } else {
-            $this->moncompteAction();
-        }
-    }
+	public function indexAction() // Controller par defaut -> Permet la connexion
+	{
+		$user = App_Session::verifierSession();
+		if (!is_null($user)) {
+			$this->consultationRecherche();
+		} else {
+			$view = new App_View('index.php');
+			$view->render(null);
+		}
+	}
+	
+	/**
+	* le user demande la page & et il est connecté
+	*/
+	public function consultationRecherche()
+	{
+		if(!empty(trim(App_Request::getParam("submit")))){
+			if(!empty(trim(App_Request::getParam("id_user"))){
+				$edt = Model_EmploiDuTemps::searchByUser(App_Request::getParam("id_user"));
+				$var = array(
+					"edt" => $edt
+					);
+				$view = new App_View('consultation.php');
+				$view->render($var);
+			}
+		}
+		else{
+			$view = new App_View('consultation_recherche.php');
+			$view->render(null);
+		}
+	}
 }
