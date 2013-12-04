@@ -58,7 +58,7 @@ class Model_GroupeTD implements Mode
     	}
     	else{
     		if($this->id!=null && $this->email!=null && $this->nom!=null && $this->prenom!=null && $this->mdp!=null && $this->type!=null){
-    			$res = App_Mysql::getInstance()->query("INSERT INTO Personne (idGrp,nomFiliere,numero_annee,niveauEtude) VALUES('".App_Mysql::getInstance()->quote($this->idGrp)."','".App_Mysql::getInstance()->quote($this->nomFiliere)."','".App_Mysql::getInstance()->quote($this->numero_annee)."','".App_Mysql::getInstance()->quote($this->niveauEtude).")");
+    			$res = App_Mysql::getInstance()->query("INSERT INTO GroupeTD (idGrp,nomFiliere,numero_annee,niveauEtude) VALUES('".App_Mysql::getInstance()->quote($this->idGrp)."','".App_Mysql::getInstance()->quote($this->nomFiliere)."','".App_Mysql::getInstance()->quote($this->numero_annee)."','".App_Mysql::getInstance()->quote($this->niveauEtude).")");
     		}
     	}
     }
