@@ -27,7 +27,7 @@ class Model_Cours implements Model
                 $this->grp =$grp;
                 $this->odProf = $idProf;
         }
-         
+        // getter
         public function getIdCours(){ return $this->idCours;}
         public function getDescription(){return $this->descrip;}
         public function getnunSalle(){return $this->numSalle;}
@@ -38,7 +38,7 @@ class Model_Cours implements Model
         public function getDate(){return $this->date;}
         public function getGroupe(){return $this->grp;}
         public function getProfesseur(){return $this->idProf;}
-        
+        //setter
         public function setCours($var){ $this->idCours=$var;}
         public function setDescription($var){$this->descrip=$var;}
         public function setnunSalle($var){ $this->numSalle=$var;}
@@ -50,6 +50,19 @@ class Model_Cours implements Model
         public function setGroupe($var){$this->grp=$var;}
         public function setProfesseur($var){ $this->idProf=$var;}
         
-        
+        /**
+         * Sauvegarde ou update
+         */
+        public function save() {
+        	$res = App_Mysql::getInstance()->query("SELECT idCours FROM cours WHERE idCours='".App_Mysql::getInstance()->quote($this->idCours)."'");
+        	if($tuple = App_Mysql::getInstance()->fetchArray($res)) {
+        		$res = App_Mysql::getInstance()->query("UPDATE cours  SET descriptionCours='".mysql_real_escape_string($this->descrip)."', numeroSalle='".mysql_real_escape_string($this->numSalle)."', nomBat='".mysql_real_escape_string($this->nomBat)."', nomMatiere='".mysql_real_escape_string($this->nomMatiere)."', heureDebut='".mysql_real_escape_string($this->heureDeb)."', heureFin='".mysql_real_escape_string($this->heureFin)."', Date='".mysql_real_escape_string($this->date)."', Groupe='".mysql_real_escape_string($this->grp)."', idProf='".mysql_real_escape_string($this->idProf)."' WHERE idCours='".$this->idCours."';");
+        	}
+        	else{
+        		if($this->idCours!=null && $this->descrip!=null && $this->numSalle!=null && $this->nomBat!=null && $this->nomMatiere!=null && $this->heureDeb!=null && $this->heureFin!=null && $this->date!=null && $this->grp!=null && $this->idProf!=null){
+        			$res = App_Mysql::getInstance()->query("INSERT INTO cours (idCours,descriptionCours,numeroSalle,nomBat,nomMatiere,heureDebut,heureFin,Date,Groupe,idProf) VALUES('".App_Mysql::getInstance()->quote($this->idCours)."','".App_Mysql::getInstance()->quote($this->descrip)."','".App_Mysql::getInstance()->quote($this->numSalle)."','".App_Mysql::getInstance()->quote($this->nomBat)."','".App_Mysql::getInstance()->quote($this->nomMatiere)."','".App_Mysql::getInstance()->quote($this->heureDeb)."','".App_Mysql::getInstance()->quote($this->heureFin)."','".App_Mysql::getInstance()->quote($this->date)."','".App_Mysql::getInstance()->quote($this->grp)."','".App_Mysql::getInstance()->quote($this->idProf).")");
+        		}
+        	}
+        }
 }
 ?>
