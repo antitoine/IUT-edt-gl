@@ -39,7 +39,6 @@ class Model_Cours implements Model
         public function getGroupe(){return $this->grp;}
         public function getProfesseur(){return $this->idProf;}
         //setter
-        public function setCours($var){ $this->idCours=$var;}
         public function setDescription($var){$this->descrip=$var;}
         public function setnunSalle($var){ $this->numSalle=$var;}
         public function setBatiment($var){ $this->nomBat=$var;}
