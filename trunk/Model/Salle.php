@@ -46,11 +46,11 @@ class Model_Salle implements Model
 	}
 	
 	// return null si aucun user n'a cet id sinon une instance de la classe User
-	public static function load($id) {
+	public static function load($numeroSalle,$nomBatiment) {
 		$ret=null;
-		$res = App_Mysql::getInstance()->query("SELECT numeroSalle,nomBat FROM Salle WHERE numeroSalle='".App_Mysql::getInstance()->quote($this->numeroSalle)."' AND nomBat='".App_Mysql::getInstance()->quote($this->nomBat)."'");
+		$res = App_Mysql::getInstance()->query("SELECT numeroSalle,nomBat FROM Salle WHERE numeroSalle='".App_Mysql::getInstance()->quote($numeroSalle)."' AND nomBat='".App_Mysql::getInstance()->quote($nomBatiment)."'");
 		if($tuple = App_Mysql::getInstance()->fetchArray($res)) {
-			$ret=new Model_User($tuple["numeroSalle"],$tuple["nomBatiment"],$tuple["Capacite"],$tuple["Specifications"]);
+			$ret=new Model_Salle($tuple["numeroSalle"],$tuple["nomBatiment"],$tuple["Capacite"],$tuple["Specifications"]);
 		}
 		return $ret;
 	}
