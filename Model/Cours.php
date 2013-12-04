@@ -64,7 +64,7 @@ class Model_Cours implements Model
         		}
         	}
         }
-        
+         
         public static function load($id) {
         	$ret=null;
         	$res = App_Mysql::getInstance()->query("SELECT * FROM cours WHERE idCours='".App_Mysql::getInstance()->quote($idCours)."'");
