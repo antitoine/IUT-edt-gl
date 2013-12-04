@@ -31,6 +31,19 @@ class Model_Salle implements Model
 	 public function getSpecification(){
 	 	return $this->specifications;
 	 }
+	 //setter
+	 public function setNumeroSalle($var){
+	 	 $this->numeroSalle=$var;
+	 }
+	 public function setNomBatiment($var){
+	 	 $this->nomBat=$var;
+	 }
+	 public function setCapacite($var){
+	 	 $this->capacite=$var;
+	 }
+	 public function setSpecification($var){
+	 	 $this->specifications=$var;
+	 }
 	 
 	
 	public function save() {
