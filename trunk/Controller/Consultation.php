@@ -20,12 +20,18 @@ class Controller_Consultation implements Controller
 	{
 		if(!empty(trim(App_Request::getParam("submit")))){
 			if(!empty(trim(App_Request::getParam("id_user"))){
-				$edt = Model_EmploiDuTemps::searchByUser(App_Request::getParam("id_user"));
-				$var = array(
-					"edt" => $edt
-					);
-				$view = new App_View('consultation.php');
-				$view->render($var);
+				$edt = App_EmploiDuTemps::searchByUser(App_Request::getParam("id_user"));
+				if(!is_null($edt)){
+					$var = array(
+						"edt" => $edt
+						);
+					$view = new App_View('affichageEdt.php');
+					$view->render($var);
+				}
+				else{
+					$view = new App_View('consultation_recherche.php');
+					$view->render(null);
+				}
 			}
 		}
 		else{
