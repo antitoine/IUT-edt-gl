@@ -63,6 +63,16 @@ class Model_GroupeTD implements Mode
     	}
     }
     
+    // return null si aucun GroupeTD n'a cet idGrp sinon une instance de la classe GroupeTD
+    public static function load($id) {
+    	$ret=null;
+    	$res = App_Mysql::getInstance()->query("SELECT * FROM GroupeTD WHERE idGrp='".App_Mysql::getInstance()->quote($idGrp)."'");
+    	if($tuple = App_Mysql::getInstance()->fetchArray($res)) {
+    		$ret=new Model_GroupeTD($tuple["idGrp"],$tuple["nomFiliere"],$tuple["numero_annee"],$tuple["niveauEtude"]);
+    	}
+    	return $ret;
+    }
+    
    
     
 }
