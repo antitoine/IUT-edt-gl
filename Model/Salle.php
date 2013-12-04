@@ -40,7 +40,7 @@ class Model_Salle implements Model
 		}
 		else{
 			if($this->numeroSalle!=null && $this->nomBat!=null && $this->capacite!=null && $this->specifications!=null){
-				$res = App_Mysql::getInstance()->query("INSERT INTO Salle (numeroSalle,nomBat,capacite,specifications) VALUES('".App_Mysql::getInstance()->quote($this->numeroSalle)."','".App_Mysql::getInstance()->quote($this->)."','".App_Mysql::getInstance()->quote($this->prenom)."','".App_Mysql::getInstance()->quote($this->mdp)."','".App_Mysql::getInstance()->quote($this->email)."','".App_Mysql::getInstance()->quote($this->type).")");
+				$res = App_Mysql::getInstance()->query("INSERT INTO Salle (numeroSalle,nomBat,capacite,specifications) VALUES('".App_Mysql::getInstance()->quote($this->numeroSalle)."','".App_Mysql::getInstance()->quote($this->nomBat)."','".App_Mysql::getInstance()->quote($this->capacite)."','".App_Mysql::getInstance()->quote($this->specifications)."')");
 			}
 		}
 	}
@@ -48,9 +48,9 @@ class Model_Salle implements Model
 	// return null si aucun user n'a cet id sinon une instance de la classe User
 	public static function load($id) {
 		$ret=null;
-		$res = App_Mysql::getInstance()->query("SELECT * FROM Personne WHERE identifiant='".App_Mysql::getInstance()->quote($id)."'");
+		$res = App_Mysql::getInstance()->query("SELECT numeroSalle,nomBat FROM Salle WHERE numeroSalle='".App_Mysql::getInstance()->quote($this->numeroSalle)."' AND nomBat='".App_Mysql::getInstance()->quote($this->nomBat)."'");
 		if($tuple = App_Mysql::getInstance()->fetchArray($res)) {
-			$ret=new Model_User($tuple["identifiant"],$tuple["email"],$tuple["nom"],$tuple["prenom"],$tuple["mdp"],$tuple["droit"]);
+			$ret=new Model_User($tuple["numeroSalle"],$tuple["nomBatiment"],$tuple["Capacite"],$tuple["Specifications"]);
 		}
 		return $ret;
 	}
