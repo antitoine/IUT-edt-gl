@@ -52,13 +52,13 @@ class Model_GroupeTD implements Mode
     }
     
     public function save() {
-    	$res = App_Mysql::getInstance()->query("SELECT idGrp FROM GroupeTD WHERE idGrp='".App_Mysql::getInstance()->quote($this->idGrp)."'");
+    	$res = App_Mysql::getInstance()->query("SELECT idGrp FROM groupeTD WHERE idGrp='".App_Mysql::getInstance()->quote($this->idGrp)."'");
     	if($tuple = App_Mysql::getInstance()->fetchArray($res)) {
     		$res = App_Mysql::getInstance()->query("UPDATE GroupeTD SET nomFiliere='".mysql_real_escape_string($this->nomFiliere)."', numero_annee='".mysql_real_escape_string($this->numero_annee)."', niveauEtude='".$this->niveauEtude."' WHERE idGrp='".$this->idGrp."';");
     	}
     	else{
     		if($this->id!=null && $this->email!=null && $this->nom!=null && $this->prenom!=null && $this->mdp!=null && $this->type!=null){
-    			$res = App_Mysql::getInstance()->query("INSERT INTO GroupeTD (idGrp,nomFiliere,numero_annee,niveauEtude) VALUES('".App_Mysql::getInstance()->quote($this->idGrp)."','".App_Mysql::getInstance()->quote($this->nomFiliere)."','".App_Mysql::getInstance()->quote($this->numero_annee)."','".App_Mysql::getInstance()->quote($this->niveauEtude).")");
+    			$res = App_Mysql::getInstance()->query("INSERT INTO groupeTD (idGrp,nomFiliere,numero_annee,niveauEtude) VALUES('".App_Mysql::getInstance()->quote($this->idGrp)."','".App_Mysql::getInstance()->quote($this->nomFiliere)."','".App_Mysql::getInstance()->quote($this->numero_annee)."','".App_Mysql::getInstance()->quote($this->niveauEtude).")");
     		}
     	}
     }
