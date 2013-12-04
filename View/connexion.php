@@ -15,7 +15,7 @@
             <form class ='formulaire' method='post' action="<?php echo App_Request::getUrl(); ?>">
                 <fieldset>
                     <legend>Connexion : </legend>
-                    <?php if ($var["comb_prob"]) { ?><span class='alerte'>Votre identifiant ou votre mot de passe n'est pas correcte.</span><?php } ?>
+                    <?php if ($var["comb_prob"]) { ?><span class='alerte'>Votre identifiant ou votre mot de passe n'est pas correct.</span><?php } ?>
                     <p>
                         <label for='identifiant'>Identifiant :</label>
                         <input type='text' placeholder='Identifiant...' name='identifiant' id='identifiant' value='<?php echo $var["identifiant"]; ?>' />
