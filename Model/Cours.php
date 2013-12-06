@@ -48,7 +48,7 @@ class Model_Cours implements Model
         public function setDate($var){ $this->date=$var;}
         public function setGroupe($var){$this->grp=$var;}
         public function setProfesseur($var){ $this->idProf=$var;}
-        
+
         /**
          * Sauvegarde ou update
          */
