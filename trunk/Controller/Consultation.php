@@ -2,7 +2,7 @@
 
 class Controller_Consultation implements Controller
 {
-	public function indexAction() // Controller par defaut -> Permet la connexion
+	public function indexAction()
 	{
 		$user = App_Session::verifierSession();
 		if (!is_null($user)) {

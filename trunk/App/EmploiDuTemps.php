@@ -20,7 +20,7 @@ class App_EmploiDuTemps
     /**
      * Permet d'avoir l'emploi du temps d'un utilisateur pour la semaine courante
      * @param string $id_user
-     * @return NULL|EmploiDuTemps
+     * @return NULL|EmploiDuTemps (null si la tableau est vide ou si l'ID user n'est pas trouvable)
      */
     public static function searchByUser($id_user) {
         $user = Model_User::load($id_user);
@@ -28,16 +28,16 @@ class App_EmploiDuTemps
             return null;
         }
         $res = App_Mysql::getInstance()->query("SELECT * FROM cours WHERE Date >= NOW() AND Date < DATE_ADD(NOW(), INTERVAL 5 DAY) ORDER BY Date ASC");
-        $arrayOfCours = array();
+        /** @var $array_cours Array de tous les cours */
+        $array_cours = array();
         $i = 0;
         while ($tuple = App_Mysql::getInstance()->fetchArray($res)) {
-            $arrayOfCours[$i] = new Model_Cours();
-            $arrayOfCours[$i]->setDescription($tuple['descriptionCours']);
-            $arrayOfCours[$i]->setAuteur($tuple['auteur_article']);
-            $arrayOfCours[$i]->setDate($tuple['date_article']);
-            $arrayOfCours[$i]->setContenu($tuple['contenu_article']);
-            $arrayOfCours[$i]->setId($tuple['num_article']);
+            $array_cours[$i] = new Model_Cours($tuple['idCours'],$tuple['descriptionCours'],$tuple['numeroSalle'],$tuple['nomBat'],$tuple['nomMatiere'],$tuple['heureDebut'],$tuple['heureFin'],$tuple['Date'],$tuple['Groupe'],$tuple['idProf']);
             $i++;
         }
+        if (count($array_cours)==0) {
+            return null;
+        }
+        return $array_cours;
     }
 }
