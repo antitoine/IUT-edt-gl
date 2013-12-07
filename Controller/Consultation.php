@@ -18,10 +18,11 @@ class Controller_Consultation implements Controller
 	public function consultationRecherche()
 	{
 		if(!empty(trim(App_Request::getParam("id_user")))){
-			$edt = App_EmploiDuTemps::searchByUser(App_Request::getParam("id_user"));
-			if(!is_null($edt)){
+            $id_user = trim(App_Request::getParam("id_user"));
+            $listCours = App_EmploiDuTemps::searchByUser($id_user);
+			if(!is_null($listCours)){
 				$var = array(
-					"edt" => $edt
+                    "listCours" => $listCours
 					);
 				$view = new App_View('affichageEdt.php');
 				$view->render($var);

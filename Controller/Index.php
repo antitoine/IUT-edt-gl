@@ -49,7 +49,8 @@ class Controller_Index implements Controller
             }
             $var = array(
                 "user" => $user,
-                "admin" => $user->getType() > 0
+                "admin" => $user->getType() > 0,
+                "listCours" => App_EmploiDuTemps::searchByUser($user->getId())
             );
             $view = new App_View('moncompte.php');
             $view->render($var);

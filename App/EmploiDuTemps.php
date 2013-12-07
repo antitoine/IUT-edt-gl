@@ -17,6 +17,7 @@ class App_EmploiDuTemps
         $this->dateFin = $df;
     }
 
+
     /**
      * Permet d'avoir l'emploi du temps d'un utilisateur pour la semaine courante
      * @param string $id_user
@@ -26,13 +27,18 @@ class App_EmploiDuTemps
         $user = Model_User::load($id_user);
         if (is_null($user)) {
             return null;
+        } else if ($user->getType() == 0) {
+            $user = Model_Etudiant::load($id_user);
+            $res = App_Mysql::getInstance()->query("SELECT * FROM cours WHERE Groupe = '".App_Mysql::getInstance()->quote($user->getIdGrp())."' AND Date >= CURDATE() AND Date < DATE_ADD(CURDATE(), INTERVAL 5 DAY) ORDER BY Date ASC");
+        } else {
+            $res = App_Mysql::getInstance()->query("SELECT * FROM cours WHERE Date >= CURDATE() AND Date < DATE_ADD(CURDATE(), INTERVAL 5 DAY) AND idProf = ".App_Mysql::getInstance()->quote($user->getId())." ORDER BY Date ASC");
         }
-        $res = App_Mysql::getInstance()->query("SELECT * FROM cours WHERE Date >= NOW() AND Date < DATE_ADD(NOW(), INTERVAL 5 DAY) ORDER BY Date ASC");
+
         /** @var $array_cours Array de tous les cours */
         $array_cours = array();
         $i = 0;
         while ($tuple = App_Mysql::getInstance()->fetchArray($res)) {
-            $array_cours[$i] = new Model_Cours($tuple['idCours'],$tuple['descriptionCours'],$tuple['numeroSalle'],$tuple['nomBat'],$tuple['nomMatiere'],$tuple['heureDebut'],$tuple['heureFin'],$tuple['Date'],$tuple['Groupe'],$tuple['idProf']);
+            $array_cours[$i] = new Model_Cours($tuple['idCours'],$tuple['idProf'],$tuple['nomMatiere'],$tuple['Groupe'],$tuple['numeroSalle'],$tuple['nomBat'],$tuple['heureDebut'],$tuple['heureFin'],$tuple['Date'],$tuple['descriptionCours']);
             $i++;
         }
         if (count($array_cours)==0) {

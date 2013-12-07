@@ -13,4 +13,5 @@
              </fieldset>
          </form>
     </div>
+
 <?php include_once 'Templates/footer.php'; ?>
