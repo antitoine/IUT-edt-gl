@@ -66,7 +66,7 @@ class Model_Cours implements Model
          
         public static function load($id) {
         	$ret=null;
-        	$res = App_Mysql::getInstance()->query("SELECT * FROM cours WHERE idCours='".App_Mysql::getInstance()->quote($idCours)."'");
+        	$res = App_Mysql::getInstance()->query("SELECT * FROM cours WHERE idCours='".App_Mysql::getInstance()->quote($id)."'");
         	if($tuple = App_Mysql::getInstance()->fetchArray($res)) {
         		$ret=new Model_Cours($tuple["idCours"],$tuple["description"],$tuple["numeroSalle"],$tuple["nomBatiment"],$tuple["nomMatiere"],$tuple["heureDebut"],$tuple["heureFin"],$tuple["Date"],$tuple["Groupe"],$tuple["idProfesseur"]);
         	}
