@@ -2,12 +2,19 @@
 class Model_Etudiant extends Model_User implements Model
 {
 	// Attribut:
-	private $idGrp;
-	
-	/**
-	* Constructeur d'un etud
-	* @param 
-	*/
+	protected $idGrp;
+
+    /**
+     * Constructeur d'un etud
+     * @param null $id
+     * @param null $email
+     * @param null $nom
+     * @param null $prenom
+     * @param null $mdp
+     * @param null $type
+     * @param null $idGrp
+     * @internal param $
+     */
 	public function __construct ($id=null,$email=null,$nom=null,$prenom=null,$mdp=null,$type=null,$idGrp=null) {
 		parent::__construct($id,$email,$nom,$prenom,$mdp,$type);
 		$this->idGrp=$idGrp;
@@ -17,14 +24,14 @@ class Model_Etudiant extends Model_User implements Model
 	* Sauvegarde ou update
 	*/
 	public function save() {
-		$super->save();
+        parent::save();
 		$res = App_Mysql::getInstance()->query("SELECT * FROM Etudiant WHERE idEtud='".App_Mysql::getInstance()->quote($this->id)."'");
-		if($tuple = App_Mysql::getInstance()->fetchArray($res)) {
-			$res = App_Mysql::getInstance()->query("UPDATE Etudiant SET idGroupe='".mysql_real_escape_string($this->idGroup)."' WHERE idEtud='".$this->id."';");
+		if(!empty(App_Mysql::getInstance()->fetchArray($res))) {
+			App_Mysql::getInstance()->query("UPDATE Etudiant SET idGroupe='".mysql_real_escape_string($this->idGrp)."' WHERE idEtud='".$this->id."';");
 		}
 		else{
 			if($this->idGrp!=null){
-				$res = App_Mysql::getInstance()->query("INSERT INTO Etudiant (idEtud,idGroupe) VALUES('".App_Mysql::getInstance()->quote($this->idEtud)."','".App_Mysql::getInstance()->quote($this->idGrp)."')");
+				App_Mysql::getInstance()->query("INSERT INTO Etudiant (idEtud,idGroupe) VALUES('".App_Mysql::getInstance()->quote($this->id)."','".App_Mysql::getInstance()->quote($this->idGrp)."')");
 			}
 		}
 	}
