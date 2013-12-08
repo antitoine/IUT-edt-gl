@@ -6,12 +6,13 @@
 /***************** BODY *****************/
 
 
-html {
-
+html, body {
+    margin:0;
+    padding:0;
+    height:100%;
 }
 
 body {
-    margin: 0;
     font-family: tahoma,verdana,arial,sans-serif;
 }
 
@@ -34,7 +35,7 @@ header.connexion > h1 {
 }
 
 header {
-    background: none repeat scroll 0 0 #4C6079;
+    background: none repeat scroll 0 0 #365679;
 }
 
 #header-title, #header-logo {
@@ -47,14 +48,7 @@ header {
     font-size: 3em;
     margin: 30px 0 45px 30px;
     position: relative;
-}
-
-.site-description {
-    font-size: 0.8em;
-    margin-left: 20px;
-    margin-top: 85px;
-    position: absolute;
-    color: rgba(0, 0, 0, 0.5);
+    text-shadow: 0 0 10px #000000;
 }
 
 #header-logo img {
@@ -110,11 +104,13 @@ header {
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     border-radius: 4px 4px 0 0;
+    text-shadow: 0 0 5px #000;
 }
 
 .menu-principal-contener ul li a#item-actif {
     background-color: #fff;
     color: #000;
+    text-shadow: none;
 }
 
 .menu-principal-contener ul li a#item-actif:hover {
@@ -135,6 +131,7 @@ header {
     -webkit-box-shadow: 0 0 15px 0 rgba(0,0,0,0.50) inset;
     -o-box-shadow: 0 0 15px 0 rgba(0,0,0,0.50) inset;
     box-shadow: 0 0 15px 0 rgba(0,0,0,0.50) inset;
+    text-shadow: none;
 }
 /**************** CONTENT ***************/
 
