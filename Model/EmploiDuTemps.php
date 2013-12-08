@@ -33,7 +33,6 @@ class Model_EmploiDuTemps
         } else {
             $res = App_Mysql::getInstance()->query("SELECT * FROM cours WHERE Date >= CURDATE() AND Date < DATE_ADD(CURDATE(), INTERVAL 5 DAY) AND idProf = ".App_Mysql::getInstance()->quote($user->getId())." ORDER BY Date ASC");
         }
-
         /** @var $array_cours Array de tous les cours */
         $array_cours = array();
         $i = 0;
