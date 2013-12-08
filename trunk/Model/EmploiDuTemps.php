@@ -1,5 +1,5 @@
 <?php
-class App_EmploiDuTemps
+class Model_EmploiDuTemps
 {
     private $listCours;
     private $dateDebut;
@@ -8,8 +8,8 @@ class App_EmploiDuTemps
     /**
     * Constructeur d'un emploi du temps
     * @param $arrayC array of all cours
-    * @param $dd date de début de la liste des cours
-    * @param $df date de fin de la liste des cours
+    * @param $dd string date de début de la liste des cours
+    * @param $df string date de fin de la liste des cours
     */
     private function __construct ($arrayC = null, $dd = null, $df = null) {
         $this->listCours = $arrayC;
@@ -21,7 +21,7 @@ class App_EmploiDuTemps
     /**
      * Permet d'avoir l'emploi du temps d'un utilisateur pour la semaine courante
      * @param string $id_user
-     * @return NULL|EmploiDuTemps (null si la tableau est vide ou si l'ID user n'est pas trouvable)
+     * @return NULL|Model_EmploiDuTemps (null si la tableau est vide ou si l'ID user n'est pas trouvable)
      */
     public static function searchByUser($id_user) {
         $user = Model_User::load($id_user);
