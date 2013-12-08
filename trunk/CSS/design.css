@@ -11,7 +11,8 @@ html {
 }
 
 body {
-
+    margin: 0;
+    font-family: tahoma,verdana,arial,sans-serif;
 }
 
 /**************** HEADER ****************/
@@ -32,8 +33,109 @@ header.connexion > h1 {
     width: 630px;
 }
 
+header {
+    background: none repeat scroll 0 0 #4C6079;
+}
+
+#header-title, #header-logo {
+    text-decoration: none;
+    color: #FFF;
+}
+
+.site-title {
+    float: left;
+    font-size: 3em;
+    margin: 30px 0 45px 30px;
+    position: relative;
+}
+
+.site-description {
+    font-size: 0.8em;
+    margin-left: 20px;
+    margin-top: 85px;
+    position: absolute;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+#header-logo img {
+    float: right;
+    margin-right: 30px;
+    margin-top: 15px;
+    position: relative;
+}
+
 /***************** MENU *****************/
 
+#navbar {
+    clear: left;
+}
+
+#title-menu {
+    display: none;
+}
+
+#menu-principal-contener {
+    height: 40px;
+    width: 900px;
+    margin-left: 10px;
+    clear: left;
+    position: relative;
+}
+
+.menu-principal-contener ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+.menu-principal-contener li {
+    float: left; /*pour IE*/
+    padding: 0 5px 0 5px;
+}
+
+.menu-principal-contener ul li a {
+    display: block;
+    float: left;
+    padding: 0 20px 0 20px;
+    color: #FFF;
+    text-decoration: none;
+    text-align: center;
+    height: 35px;
+    font-size: 1.2em;
+    padding-top: 5px;
+    -moz-transition: all 0.75s;
+    -webkit-transition: all 0.75s;
+    -o-transition: all 0.75s;
+    transition: all 0.75s;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px 4px 0 0;
+}
+
+.menu-principal-contener ul li a#item-actif {
+    background-color: #fff;
+    color: #000;
+}
+
+.menu-principal-contener ul li a#item-actif:hover {
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    -o-box-shadow: none;
+    box-shadow: none;
+}
+
+.menu-principal-contener ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #000;
+    -moz-transition: all 0.75s;
+    -webkit-transition: all 0.75s;
+    -o-transition: all 0.75s;
+    transition: all 0.75s;
+    -moz-box-shadow: 0 0 15px 0 rgba(0,0,0,0.50) inset;
+    -webkit-box-shadow: 0 0 15px 0 rgba(0,0,0,0.50) inset;
+    -o-box-shadow: 0 0 15px 0 rgba(0,0,0,0.50) inset;
+    box-shadow: 0 0 15px 0 rgba(0,0,0,0.50) inset;
+}
 /**************** CONTENT ***************/
 
 .connexion#content {
