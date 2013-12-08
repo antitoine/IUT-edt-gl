@@ -2,17 +2,23 @@
 class Model_User implements Model
 {
 	// Attribut:
-	private $id;
-	private $email;
-	private $nom;
-	private $prenom;
-	private $mdp; // crypté
-	private $type; // int, 0=étudiant, 1=prof, 2=admin
-	
-	/**
-	* Constructeur d'un utilisateur 
-	* @param 
-	*/
+	protected $id;
+	protected $email;
+	protected $nom;
+	protected $prenom;
+	protected $mdp; // crypté
+	protected $type; // int, 0=étudiant, 1=prof, 2=admin
+
+    /**
+     * Constructeur d'un utilisateur
+     * @param null $id
+     * @param null $email
+     * @param null $nom
+     * @param null $prenom
+     * @param null $mdp
+     * @param null $type
+     * @internal param $
+     */
 	public function __construct ($id=null,$email=null,$nom=null,$prenom=null,$mdp=null,$type=null) {
 		$this->id=$id;
 		$this->email=$email;
@@ -26,11 +32,11 @@ class Model_User implements Model
 	public function save() {
 		$res = App_Mysql::getInstance()->query("SELECT id FROM Personne WHERE identifiant='".App_Mysql::getInstance()->quote($this->id)."'");
 		if($tuple = App_Mysql::getInstance()->fetchArray($res)) {
-			$res = App_Mysql::getInstance()->query("UPDATE Personne SET email='".mysql_real_escape_string($this->email)."', nom='".mysql_real_escape_string($this->nom)."', prenom='".mysql_real_escape_string($this->prenom)."', mdp='".mysql_real_escape_string($this->mdp)."', droit='".mysql_real_escape_string($this->type)."' WHERE identifiant='".$this->id."';");
+            App_Mysql::getInstance()->query("UPDATE Personne SET email='".mysql_real_escape_string($this->email)."', nom='".mysql_real_escape_string($this->nom)."', prenom='".mysql_real_escape_string($this->prenom)."', mdp='".mysql_real_escape_string($this->mdp)."', droit='".mysql_real_escape_string($this->type)."' WHERE identifiant='".$this->id."';");
 		}
 		else{
 			if($this->id!=null && $this->email!=null && $this->nom!=null && $this->prenom!=null && $this->mdp!=null && $this->type!=null){
-				$res = App_Mysql::getInstance()->query("INSERT INTO Personne (identifiant,nom,prenom,mdp,email,droit) VALUES('".App_Mysql::getInstance()->quote($this->id)."','".App_Mysql::getInstance()->quote($this->nom)."','".App_Mysql::getInstance()->quote($this->prenom)."','".App_Mysql::getInstance()->quote($this->mdp)."','".App_Mysql::getInstance()->quote($this->email)."','".App_Mysql::getInstance()->quote($this->type).")");
+				App_Mysql::getInstance()->query("INSERT INTO Personne (identifiant,nom,prenom,mdp,email,droit) VALUES('".App_Mysql::getInstance()->quote($this->id)."','".App_Mysql::getInstance()->quote($this->nom)."','".App_Mysql::getInstance()->quote($this->prenom)."','".App_Mysql::getInstance()->quote($this->mdp)."','".App_Mysql::getInstance()->quote($this->email)."','".App_Mysql::getInstance()->quote($this->type).")");
 			}
 		}
 	}

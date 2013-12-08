@@ -19,7 +19,7 @@ class Controller_Consultation implements Controller
 	{
 		if(!empty(trim(App_Request::getParam("id_user")))){
             $id_user = trim(App_Request::getParam("id_user"));
-            $listCours = App_EmploiDuTemps::searchByUser($id_user);
+            $listCours = Model_EmploiDuTemps::searchByUser($id_user);
 			if(!is_null($listCours)){
 				$var = array(
                     "listCours" => $listCours
