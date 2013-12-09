@@ -1,7 +1,7 @@
 <?php include_once 'Templates/header.php'; ?>
-    <div id="content">
+    <div class="content">
         <?php if (!empty($var["listCours"])) { ?>
-            <table>
+            <table class="EDT">
                 <caption>Emploi du temps</caption>
 
                 <thead> <!-- En-tête du tableau -->

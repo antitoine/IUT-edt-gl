@@ -1,8 +1,8 @@
 <?php include_once 'Templates/header.php'; ?>
-    <div id="content">
+    <div class="content">
         <p>Bienvenue sur votre compte <?php echo $var["user"]->getPrenom(); ?> <?php echo $var["user"]->getNom(); ?></p>
         <?php if (!empty($var["listCours"])) { ?>
-        <table>
+        <table class="EDT">
             <caption>Votre emploi du temps des 4 jours à venir</caption>
 
             <thead> <!-- En-tête du tableau -->

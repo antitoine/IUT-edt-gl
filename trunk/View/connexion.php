@@ -7,10 +7,10 @@
     <title></title>
 </head>
 <body>
-    <header class="connexion">
+    <header class="header-connexion">
         <h1>Connexion aux emplois du temps - I.U.T Montpellier 2</h1>
     </header>
-    <div id="content" class="connexion">
+    <div class="connexion">
         <div>
             <form class ='formulaire' method='post' action="<?php echo App_Request::getUrl(); ?>">
                 <fieldset>
@@ -31,7 +31,7 @@
             </form>
         </div>
     </div>
-    <footer class="connexion">
+    <footer class="footer-connexion">
     </footer>
     </div>
 </body>
