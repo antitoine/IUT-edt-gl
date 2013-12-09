@@ -21,7 +21,7 @@ class Model_EmploiDuTemps
     /**
      * Permet d'avoir l'emploi du temps d'un utilisateur pour la semaine courante
      * @param string $id_user
-     * @return NULL|Model_EmploiDuTemps (null si la tableau est vide ou si l'ID user n'est pas trouvable)
+     * @return NULL|Model_EmploiDuTemps (null si la tableau est vide ou si l'ID user est introuvable)
      */
     public static function searchByUser($id_user) {
         $user = Model_User::load($id_user);
@@ -31,7 +31,7 @@ class Model_EmploiDuTemps
             $user = Model_Etudiant::load($id_user);
             $res = App_Mysql::getInstance()->query("SELECT * FROM cours WHERE Groupe = '".App_Mysql::getInstance()->quote($user->getIdGrp())."' AND Date >= CURDATE() AND Date < DATE_ADD(CURDATE(), INTERVAL 5 DAY) ORDER BY Date ASC");
         } else {
-            $res = App_Mysql::getInstance()->query("SELECT * FROM cours WHERE Date >= CURDATE() AND Date < DATE_ADD(CURDATE(), INTERVAL 5 DAY) AND idProf = ".App_Mysql::getInstance()->quote($user->getId())." ORDER BY Date ASC");
+            $res = App_Mysql::getInstance()->query("SELECT * FROM cours WHERE Date >= CURDATE() AND Date < DATE_ADD(CURDATE(), INTERVAL 5 DAY) AND idProf = '".App_Mysql::getInstance()->quote($user->getId())."' ORDER BY Date ASC");
         }
         /** @var $array_cours Array de tous les cours */
         $array_cours = array();
@@ -44,5 +44,57 @@ class Model_EmploiDuTemps
             return null;
         }
         return $array_cours;
+    }
+
+    /**
+     * Permet d'avoir l'emploi du temps d'un groupe de TD
+     * @param string $grp
+     * @return NULL|Model_EmploiDuTemps (null si la tableau est vide ou si le groupe est introuvable)
+     */
+    public static function searchByGroupTD($grp) {
+        if (is_null($grp)) {
+            return null;
+        } else {
+            $res = App_Mysql::getInstance()->query("SELECT * FROM cours WHERE Groupe = '".App_Mysql::getInstance()->quote($grp)."' AND Date >= CURDATE() AND Date < DATE_ADD(CURDATE(), INTERVAL 5 DAY) ORDER BY Date ASC");
+        }
+        /** @var $array_cours Array de tous les cours */
+        $array_cours = array();
+        $i = 0;
+        while ($tuple = App_Mysql::getInstance()->fetchArray($res)) {
+            $array_cours[$i] = new Model_Cours($tuple['idCours'],$tuple['idProf'],$tuple['nomMatiere'],$tuple['Groupe'],$tuple['numeroSalle'],$tuple['nomBat'],$tuple['heureDebut'],$tuple['heureFin'],$tuple['Date'],$tuple['descriptionCours']);
+            $i++;
+        }
+        if (count($array_cours)==0) {
+            return null;
+        }
+        return $array_cours;
+    }
+
+    /**
+     * Permet d'avoir l'emploi du temps d'une personne
+     * @param string $nom
+     * @param string $prenom
+     * @return NULL|Model_EmploiDuTemps (null si la tableau est vide ou si le nom/prenom est introuvable)
+     */
+    public static function searchByNomPrenom($nom,$prenom) {
+        if (is_null($nom) || is_null($prenom)) {
+            return null;
+        }
+        // TODO à faire ...
+        return null;
+    }
+
+    /**
+     * Permet d'avoir l'emploi du temps d'une salle d'un batiment
+     * @param string $bat
+     * @param string $salle
+     * @return NULL|Model_EmploiDuTemps (null si la tableau est vide ou si le batiment/salle est introuvable)
+     */
+    public static function searchByBatimentSalle($bat,$salle) {
+        if (is_null($bat) || is_null($salle)) {
+            return null;
+        }
+        // TODO à faire ...
+        return null;
     }
 }

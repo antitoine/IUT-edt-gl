@@ -19,13 +19,13 @@ body {
 /**************** HEADER ****************/
 
 
-header.connexion  {
+.header-connexion  {
     background: url("../Images/fond-bandeau.gif") no-repeat scroll center top rgba(0, 0, 0, 0);
     height: 125px;
     width: 100%;
 }
 
-header.connexion > h1 {
+.header-connexion > h1 {
     color: #FFFFFF;
     font-size: 1.5em;
     margin-left: auto;
@@ -135,24 +135,53 @@ header {
 }
 /**************** CONTENT ***************/
 
-.connexion#content {
+.connexion {
     background: url("../Images/fond-content.gif") repeat-y scroll center top rgba(0, 0, 0, 0);
     min-height: 250px;
     width: 100%;
 }
 
-.connexion#content > div {
+.connexion > div {
     margin: 0 auto;
     width: 643px;
     padding: 10px;
 }
 
+.content {
+    padding: 50px;
+}
+
 /**************** FOOTER ****************/
 
-footer.connexion  {
+.footer-connexion  {
     background: url("../Images/barre-bas.gif") no-repeat scroll center center rgba(0, 0, 0, 0);
     height: 14px;
     width: 100%;
+}
+
+/****************************************/
+/****************** EDT *****************/
+/****************************************/
+
+table.EDT, .EDT th, .EDT td
+{
+    border: 1px solid black;
+}
+
+table.EDT {
+    border-collapse:collapse;
+    width:100%;
+}
+
+.EDT th {
+    height:50px;
+    background-color: rgba(64, 118, 164, 0.56);
+    color:white;
+}
+
+.EDT td {
+    padding: 10px;
+    text-align: center;
 }
 
 /****************************************/
