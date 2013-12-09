@@ -12,7 +12,7 @@
             <h1 class="site-title">Emploi du temps IUT UM2</h1>
         </a>
         <a id="header-logo" rel="home" title="EDT IUT UM2 Logo" href="<?php echo App_Request::getUrl() ?>">
-            <img alt="site-logo" src="http://placehold.it/350x150" height="150" width="350">
+            <img alt="site-logo" src="Images/logo.png" height="150" width="150">
         </a>
         <div id="navbar">
             <nav id="site-navigation">
