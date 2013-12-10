@@ -22,7 +22,7 @@
                     <td><?php echo $var["listCours"][0][$i]->getDate(); ?></td>
                     <td><?php echo $var["listCours"][0][$i]->getHeureDebut(); ?></td>
                     <td><?php echo $var["listCours"][0][$i]->getHeureFin(); ?></td>
-                    <td><?php echo $var["listCours"][0][$i]->getBatiment(); echo $var["listCours"][0][$i]->getnunSalle(); ?></td>
+                    <td><?php echo $var["listCours"][0][$i]->getBatiment(); echo $var["listCours"][0][$i]->getnumSalle(); ?></td>
                     <td><?php echo $var["listCours"][0][$i]->getMatiere(); ?></td>
                     <td><?php echo $var["listCours"][0][$i]->getDescription(); ?></td>
                 </tr>
