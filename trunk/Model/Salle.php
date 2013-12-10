@@ -67,14 +67,16 @@ class Model_Salle implements Model
 		return $ret;
 	}
 	
-	// return un tableau contenant toutes les salles
+	/**
+     * return un tableau contenant toutes les salles
+     */
 	public static function loadAll() {
 		$ret=null;
-		$res = App_Mysql::getInstance()->query("SELECT numeroSalle,nomBat FROM Salle");
+		$res = App_Mysql::getInstance()->query("SELECT numeroSalle, nomBat FROM Salle");
 		$i=0;
 		while($tuple = App_Mysql::getInstance()->fetchArray($res)) {
-			$ret[$i]["nomBat"]=$tuple["nomBat"];
-			$ret[$i]["numeroSalle"]=$tuple["numeroSalle"];
+			$ret["nomBat"][$i]=$tuple["nomBat"];
+			$ret["numeroSalle"][$i]=$tuple["numeroSalle"];
 			$i++;
 		}
 		return $ret;
