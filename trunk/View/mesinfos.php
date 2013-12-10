@@ -13,20 +13,25 @@
 			else echo "Admin";
 		?>
 	</p>
-	<p>
+	
         <h4>Modifier ses infos</h4>
         
-        <label for='mdp'>Mot de passe <span class='colons'>:</span></label>
-                    <input type='password' name='mdp_Modif' id='mdp_Modif'/>
+        <p>
+          <label for='mdp'>Mot de passe <span class='colons'>:</span></label>
+          <input type='password' name='mdp' id='mdp'/>
          
-      </p>
-      <p>
+        <p/>
+        
+        <p>
            <label for='email'>Email <span class='colons'>:</span></label>
-           <input type='email' name='email_Modif' id='email_Modif' />
-      <p>
+           <input type='email' name='email' id='email' />
+        <p/>
+        
+        <p>
                 <input type="hidden" name="send" value="true" />
                 <input type='submit' value='Envoyer' />
-            </p>
+        </p>
+       
 	
 	
 	</div>

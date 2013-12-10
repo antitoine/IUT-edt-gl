@@ -15,19 +15,19 @@ class Controller_Mesinfos implements Controller
 	public function modifier($var)
 	{
 		if (!empty(App_Request::getParam("envoi"))) {
-			$user_id= trim(App_Request::getParam("user_id"));// recupere l'id de l'utilisateur courant
+			$user_id= $var["user"]->getId();
 			$user= Model_User::load($user_id);//cree une instance d'un utilisatur
 			if($user->getType()==0){
 				$user=Model_Etudiant::load($user_id);
 			}
-			if (!empty(trim(App_Request::getParam("mdp_Modif")))) {
-				$mdp = trim(App_Request::getParam("mdp_Modif"));// recupere le nouveau mdp
+			if (!empty(trim(App_Request::getParam('mdp')))) {
+				$mdp = trim(App_Request::getParam('mdp'));// recupere le nouveau mdp
 				$user->setMdp($mdp);
 				$var["mdp"]=$mdp;
 			}
 			
-			if(!empty(trim(App_Request::getParam("email_Modif")))){
-				$email = trim(App_Request::getParam("email_Modif"));// recupere le nouveau email
+			if(!empty(trim(App_Request::getParam('email')))){
+				$email = trim(App_Request::getParam('email'));// recupere le nouveau email
 				$syntaxe="#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#";
 				if(preg_match($syntaxe,$email)){
 					$user->setEmail($email);
