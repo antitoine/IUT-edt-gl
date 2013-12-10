@@ -54,7 +54,7 @@ class Model_User implements Model
 	// return null si aucun user n'a ce nom et ce prenom sinon un tableau d'instance de la classe User
 	public static function loadByNomPrenom($nom,$prenom) {
 		$ret=null;
-		$res = App_Mysql::getInstance()->query("SELECT * FROM Personne WHERE nom='".App_Mysql::getInstance()->quote($nom)."' AND prenom='".App_Mysql::getInstance()->quote($prenom)."');
+		$res = App_Mysql::getInstance()->query("SELECT * FROM Personne WHERE nom='".App_Mysql::getInstance()->quote($nom)."' AND prenom='".App_Mysql::getInstance()->quote($prenom)."'");
 		$i=0;
 		while($tuple = App_Mysql::getInstance()->fetchArray($res)) {
 			$ret[$i]=new Model_User($tuple["identifiant"],$tuple["email"],$tuple["nom"],$tuple["prenom"],$tuple["mdp"],$tuple["droit"]);
