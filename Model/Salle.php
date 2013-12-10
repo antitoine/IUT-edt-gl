@@ -73,8 +73,8 @@ class Model_Salle implements Model
 		$res = App_Mysql::getInstance()->query("SELECT numeroSalle,nomBat FROM Salle");
 		$i=0;
 		while($tuple = App_Mysql::getInstance()->fetchArray($res)) {
-			$ret[$i][0]=$tuple["nomBat"];
-			$ret[$i][1]=$tuple["numeroSalle"];
+			$ret[$i]["nomBat"]=$tuple["nomBat"];
+			$ret[$i]["numeroSalle"]=$tuple["numeroSalle"];
 			$i++;
 		}
 		return $ret;
