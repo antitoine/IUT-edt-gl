@@ -170,8 +170,33 @@ header {
 
 footer {
     clear: both;
-    padding-top: 100px;
+    padding-top: 10px;
+    padding-bottom : 10px;
+    background: none repeat scroll 0 0 #365679;
+    width:100%;
+    bottom:0;
 }
+
+#footer-txt {
+	color : white;
+	font-size : 12px;
+	padding-left:10px;
+	font-style: oblique;
+}
+
+#footer-copyright {
+	color : white;
+	font-size : 10px;
+	font-style: italic;
+	padding-left :10px;
+}
+
+
+a.link:link, a.link:visited
+{
+   color: #FFFFFF;
+}
+
 
 /****************************************/
 /****************** EDT *****************/
