@@ -40,7 +40,7 @@ class Model_EmploiDuTemps
             $array_cours[0][$i] = new Model_Cours($tuple['idCours'],$tuple['idProf'],$tuple['nomMatiere'],$tuple['Groupe'],$tuple['numeroSalle'],$tuple['nomBat'],$tuple['heureDebut'],$tuple['heureFin'],$tuple['Date'],$tuple['descriptionCours']);
             $i++;
         }
-        if (count($array_cours[0])==0) {
+        if (count($array_cours)==0) {
             return null;
         }
         return $array_cours;
