@@ -24,7 +24,6 @@
                         <?php if (isset($var["admin"]) && $var["admin"]): ?>
                             <li><a <?php if (App_Request::isCurrent('modification')): ?>id="item-actif"<?php endif ?> href="<?php echo App_Request::getUrl('modification') ?>">Modifier</a></li>
                         <?php endif ?>
-                        <li><a <?php if (App_Request::isCurrent('contacter')): ?>id="item-actif"<?php endif ?> href="<?php echo App_Request::getUrl('contacter') ?>">Contact</a></li>
                         <li><a <?php if (App_Request::isCurrent('mesinfos')): ?>id="item-actif"<?php endif ?> href="<?php echo App_Request::getUrl('mesinfos'); ?>">Mes informations</a></li>
                         <li><a <?php if (App_Request::isCurrent('Index','deconnexion')): ?>id="item-actif"<?php endif ?> href="<?php echo App_Request::getUrl('Index','deconnexion'); ?>">Déconnexion</a></li>
                     </ul>
