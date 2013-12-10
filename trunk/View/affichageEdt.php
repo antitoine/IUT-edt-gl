@@ -1,6 +1,7 @@
 <?php include_once 'Templates/header.php'; ?>
     <div class="content">
-        <?php if (!empty($var["listCours"])) { ?>
+        <?php if (!empty($var["listCours"])) { 
+        		for($j=0;$j<count($var["listCours"]);$j++){ ?>
             <table class="EDT">
                 <caption>Emploi du temps</caption>
 
@@ -16,18 +17,18 @@
                 </thead>
 
                 <tbody> <!-- Corps du tableau -->
-                <?php for($i=0;$i<count($var["listCours"]);$i++) { ?>
+                <?php for($i=0;$i<count($var["listCours"][$j]);$i++) { ?>
                     <tr>
-                        <td><?php echo $var["listCours"][$i]->getDate(); ?></td>
-                        <td><?php echo $var["listCours"][$i]->getHeureDebut(); ?></td>
-                        <td><?php echo $var["listCours"][$i]->getHeureFin(); ?></td>
-                        <td><?php echo $var["listCours"][$i]->getBatiment(); echo $var["listCours"][$i]->getnunSalle(); ?></td>
-                        <td><?php echo $var["listCours"][$i]->getMatiere(); ?></td>
-                        <td><?php echo $var["listCours"][$i]->getDescription(); ?></td>
+                        <td><?php echo $var["listCours"][$j][$i]->getDate(); ?></td>
+                        <td><?php echo $var["listCours"][$j][$i]->getHeureDebut(); ?></td>
+                        <td><?php echo $var["listCours"][$j][$i]->getHeureFin(); ?></td>
+                        <td><?php echo $var["listCours"][$j][$i]->getBatiment(); echo $var["listCours"][$j][$i]->getnunSalle(); ?></td>
+                        <td><?php echo $var["listCours"][$j][$i]->getMatiere(); ?></td>
+                        <td><?php echo $var["listCours"][$j][$i]->getDescription(); ?></td>
                     </tr>
                 <?php } ?>
                 </tbody>
             </table>
-        <?php } ?>
+        <?php }} ?>
     </div>
 <?php include_once 'Templates/footer.php'; ?>
