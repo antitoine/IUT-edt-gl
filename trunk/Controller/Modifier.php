@@ -76,6 +76,27 @@ class Controller_Modifier implements Controller
         if (!empty(App_Request::getParam("grptd"))) {
             $groupe = $var["listGroup"][App_Request::getParam("grptd")];
         }
+        if (!empty(App_Request::getParam("matiere"))) {
+            $matiere = App_Request::getParam("matiere");
+        }
+        if (!empty(trim(App_Request::getParam("description")))) {
+            $description = trim(App_Request::getParam("description"));
+        }
+        if (isset($date) && isset($heured) && isset($heuref)
+            && isset($numSalle) && isset($nomBat) && isset($idprof)
+            && isset($groupe) && isset($matiere)) {
+            $newCours = new Model_Cours(null,$idprof,$matiere,$groupe,$numSalle,$nomBat,$heured,$heuref,$date);
+            if (isset($description)) {
+                $newCours->setDescription($description);
+            }
+            $newCours->save();
+            $view = new App_View('ajout_cours_reussi.php');
+            $view->render($var);
+        } else {
+            $var["prob_ajout"] = true;
+            $view = new App_View('modifier_cours.php');
+            $view->render($var);
+        }
     }
 
     public function modifierCours($var)

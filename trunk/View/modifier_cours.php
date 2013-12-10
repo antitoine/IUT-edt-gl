@@ -3,6 +3,9 @@
         <form class ='formulaire-side-left' method='post' action="<?php echo App_Request::getUrl('modifier'); ?>">
             <fieldset>
                 <legend>Ajouter un cours</legend>
+                <?php if (isset($var["prob_ajout"]) && $var["prob_ajout"]): ?>
+                    <p>Problème à l'ajout, l'un des champs (sauf description) doit être vide ou non conforme</p>
+                <?php endif ?>
                 <p>
                     <label for='date'>Date :</label>
                     <input type='date' placeholder='2013-12-09 ...' name='date' id='date' value='<?php if (isset($var["date"])) { echo $var["date"]; } ?>' />
@@ -58,10 +61,14 @@
                         <option value="">Séléctionnez une matière</option>
                         <?php if (isset($var["listMatiere"])):
                             for($i=0;$i<count($var["listMatiere"]);$i++): ?>
-                                <option value="<?php echo $i ?>"><?php echo $var["listMatiere"][$i]->getNomMatiere() ?></option>
+                                <option value="<?php echo $var["listMatiere"][$i]->getNomMatiere() ?>"><?php echo $var["listMatiere"][$i]->getNomMatiere() ?></option>
                             <?php endfor ?>
                         <?php endif ?>
                     </select>
+                </p>
+                <p>
+                    <label for='description'>Description complémentaire :</label>
+                    <textarea name="description" id="description"><?php if (isset($var["description"])) { echo $var["description"]; } ?></textarea>
                 </p>
                 <p>
                     <input type="hidden" value="ok" name="add_cours" id="add_cours" />
