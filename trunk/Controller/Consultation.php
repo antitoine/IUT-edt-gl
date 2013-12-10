@@ -6,7 +6,10 @@ class Controller_Consultation implements Controller
 	{
 		$user = App_Session::verifierSession();
 		if (!is_null($user)) {
-			$this->consultationRecherche();
+            $var = array(
+                "admin" => $user->getType() >0
+            );
+			$this->consultationRecherche($var);
 		} else {
 			header ('Location: '.App_Request::getUrl());
 		}
@@ -15,7 +18,7 @@ class Controller_Consultation implements Controller
 	/**
 	* le user demande la page & et il est connecté
 	*/
-	public function consultationRecherche()
+	public function consultationRecherche($var)
 	{
         if (!empty(App_Request::getParam("envoi"))) {
             $listCours = null;
@@ -35,18 +38,16 @@ class Controller_Consultation implements Controller
                 $listCours = Model_EmploiDuTemps::searchByBatimentSalle($bat,$salle);
             }
             if(!is_null($listCours)){
-                $var = array(
-                    "listCours" => $listCours
-                );
+                $var["listCours"] = $listCours;
                 $view = new App_View('affichageEdt.php');
                 $view->render($var);
             } else {
                 $view = new App_View('consultation_recherche.php');
-                $view->render(null);
+                $view->render($var);
             }
         } else {
 			$view = new App_View('consultation_recherche.php');
-			$view->render(null);
+			$view->render($var);
 		}
 	}
 }
