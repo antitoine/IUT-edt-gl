@@ -54,7 +54,7 @@ class App
                 $controller->$action();
             }
         } catch (Exception $e) {
-            echo $e; // Pour le debug à retirer pour la prod
+            // echo $e; Pour le debug à retirer pour la prod
             $view = new App_View('error_404.php'); // en cas de controller ou d'action inconnu,sinon un possible soulevement d'une exception dans une action
             $view->render(null);
         }
