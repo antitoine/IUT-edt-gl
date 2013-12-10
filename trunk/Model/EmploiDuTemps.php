@@ -86,7 +86,7 @@ class Model_EmploiDuTemps
         }
         
         else if ($user->getType() == 0) {
-            $user = Model_Etudiant::load($id_user);
+            $user = Model_Etudiant::loadByNomPrenom($id_user);
             $res = App_Mysql::getInstance()->query("SELECT * FROM cours WHERE Groupe = '".App_Mysql::getInstance()->quote($user->getIdGrp())."' AND Date >= CURDATE() AND Date < DATE_ADD(CURDATE(), INTERVAL 5 DAY) ORDER BY Date ASC");
         } else {
             $res = App_Mysql::getInstance()->query("SELECT * FROM cours WHERE Date >= CURDATE() AND Date < DATE_ADD(CURDATE(), INTERVAL 5 DAY) AND idProf = '".App_Mysql::getInstance()->quote($user->getId())."' ORDER BY Date ASC");
