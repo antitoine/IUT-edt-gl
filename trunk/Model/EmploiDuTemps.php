@@ -101,7 +101,22 @@ class Model_EmploiDuTemps
         if (is_null($bat) || is_null($salle)) {
             return null;
         }
-        // TODO à faire ...
-        return null;
+        $lieu = Model_Salle::loadByNumSalleNomBat($salle,$bat);
+        if (is_null($lieu)) {
+            return null;
+        }
+        else {
+            $res = App_Mysql::getInstance()->query("SELECT * FROM cours WHERE Date >= CURDATE() AND Date < DATE_ADD(CURDATE(), INTERVAL 5 DAY) AND nomBat = '".App_Mysql::getInstance()->quote($lieu->getNomBat())."' AND numeroSalle = '".App_Mysql::getInstance()->quote($lieu->getNumeroSalle())."' ORDER BY Date ASC");
+        }
+        /** @var $array_cours Array de tous les cours */
+        $i = 0;
+        while ($tuple = App_Mysql::getInstance()->fetchArray($res)) {
+            $array_cours[0][$i] = new Model_Cours($tuple['idCours'],$tuple['idProf'],$tuple['nomMatiere'],$tuple['Groupe'],$tuple['numeroSalle'],$tuple['nomBat'],$tuple['heureDebut'],$tuple['heureFin'],$tuple['Date'],$tuple['descriptionCours']);
+            $i++;
+        }
+        if (count($array_cours)==0) {
+            return null;
+        }
+        return $array_cours;
     }
 }
