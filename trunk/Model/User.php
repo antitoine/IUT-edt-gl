@@ -73,6 +73,20 @@ class Model_User implements Model
 		return $ret;
 	}
 	
+	// return null s'il n'y a aucun prof sinon un tableau d'instance de la classe User
+	public static function loadAllProf() {
+		$ret=null;
+		$res = App_Mysql::getInstance()->query("SELECT * FROM Personne WHERE droit='1'");
+		$i=0;
+		while($tuple = App_Mysql::getInstance()->fetchArray($res)) {
+			$ret[$i]["id"]=$tuple["identifiant"];
+			$ret[$i]["nom"]=$tuple["nom"];
+			$ret[$i]["prenom"]=$tuple["prenom"];
+			$i++;
+		}
+		return $ret;
+	}
+	
 	public function getId(){ return $this->id; }
 	public function getEmail(){ return $this->email; }
 	public function getNom(){ return $this->nom; }
