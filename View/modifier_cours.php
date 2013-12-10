@@ -18,6 +18,7 @@
                 <p>
                     <label for='salle'>Salle :</label>
                     <select name="salle">
+                        <option value="">Séléctionnez une salle</option>
                         <?php if (isset($var["listSalle"])):
                                 for($i=0;$i<count($var["listSalle"]["nomBat"]);$i++): ?>
                                     <option value="<?php echo $i ?>"><?php echo $var["listSalle"]["nomBat"][$i]; echo $var["listSalle"]["numeroSalle"][$i] ?></option>
@@ -29,6 +30,7 @@
                     <p>
                         <label for='prof'>Professeur :</label>
                         <select name="prof">
+                            <option value="">Séléctionnez un professeur</option>
                             <?php if (isset($var["listProf"])):
                                 for($i=0;$i<count($var["listProf"]["id"]);$i++): ?>
                                     <option value="<?php echo $i ?>"><?php echo $var["listProf"]["id"][$i]." (".$var["listProf"]["nom"][$i]." ".$var["listProf"]["prenom"][$i].")" ?></option>
@@ -42,9 +44,21 @@
                 <p>
                     <label for='grptd'>Groupe de TD :</label>
                     <select name="grptd">
+                        <option value="">Séléctionnez un groupe de TD</option>
                         <?php if (isset($var["listGroup"])):
                             for($i=0;$i<count($var["listGroup"]);$i++): ?>
                                 <option value="<?php echo $i ?>"><?php echo $var["listGroup"][$i] ?></option>
+                            <?php endfor ?>
+                        <?php endif ?>
+                    </select>
+                </p>
+                <p>
+                    <label for='matiere'>Matiere :</label>
+                    <select name="matiere">
+                        <option value="">Séléctionnez une matière</option>
+                        <?php if (isset($var["listMatiere"])):
+                            for($i=0;$i<count($var["listMatiere"]);$i++): ?>
+                                <option value="<?php echo $i ?>"><?php echo $var["listMatiere"][$i]->getNomMatiere() ?></option>
                             <?php endfor ?>
                         <?php endif ?>
                     </select>

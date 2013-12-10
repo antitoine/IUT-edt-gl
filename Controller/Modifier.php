@@ -36,6 +36,10 @@ class Controller_Modifier implements Controller
                     $var["listCours"] = $listCours;
                 }
             }
+            $listMatiere = Model_Matiere::loadAll();
+            if (!is_null($listMatiere)) {
+                $var["listMatiere"] = $listMatiere;
+            }
             if (!empty(App_Request::getParam("add_cours"))) {
                 $this->ajoutCours($var);
             } else if (!empty(App_Request::getParam("modifier_cours"))) {
@@ -51,7 +55,27 @@ class Controller_Modifier implements Controller
 
     public function ajoutCours($var)
     {
-
+        if (!empty(trim(App_Request::getParam("date")))) {
+            $date = trim(App_Request::getParam("date"));
+        }
+        if (!empty(trim(App_Request::getParam("heured")))) {
+            $heured = trim(App_Request::getParam("heured"));
+        }
+        if (!empty(trim(App_Request::getParam("heuref")))) {
+            $heuref = trim(App_Request::getParam("heuref"));
+        }
+        if (!empty(App_Request::getParam("salle"))) {
+            $numSalle = $var["listSalle"]["numeroSalle"][App_Request::getParam("salle")];
+            $nomBat = $var["listSalle"]["nomBat"][App_Request::getParam("salle")];
+        }
+        if ($var["not_prof"] && !empty(App_Request::getParam("prof"))) {
+            $idprof = $var["listProf"]["id"][App_Request::getParam("prof")];
+        } else {
+            $idprof = $var["user"]->getId();
+        }
+        if (!empty(App_Request::getParam("grptd"))) {
+            $groupe = $var["listGroup"][App_Request::getParam("grptd")];
+        }
     }
 
     public function modifierCours($var)
