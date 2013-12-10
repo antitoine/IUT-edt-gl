@@ -12,17 +12,16 @@ class Model_Salle implements Model
 	 * Constructeur d'un utilisateur
 	 * @param
 	 */
-	public function __construct ($numeroSalle=null,$nomBat=null,$capacite=null,$specification=null) {
+	public function __construct ($numeroSalle=null,$nomBat=null,$capacite=null,$specifications=null) {
 		$this->numeroSalle=$numeroSalle;
 		$this->nomBat=$nomBat;
 		$this->capacite=$capacite;
 		$this->specifications=$specifications;
-		
 	}
 	 public function getNumeroSalle(){
 	 	return $this->numeroSalle;
 	 }
-	 public function getNomBatiment(){
+	 public function getNomBat(){
 	 	return $this->nomBat;
 	 }
 	 public function getCapacite(){
@@ -59,15 +58,19 @@ class Model_Salle implements Model
 	}
 	
 	// return null si aucun user n'a cet id sinon une instance de la classe User
-	public static function load($numeroSalle,$nomBatiment) {
+	public static function loadByNumSalleNomBat($numeroSalle,$nomBatiment) {
 		$ret=null;
-		$res = App_Mysql::getInstance()->query("SELECT numeroSalle,nomBat FROM Salle WHERE numeroSalle='".App_Mysql::getInstance()->quote($numeroSalle)."' AND nomBat='".App_Mysql::getInstance()->quote($nomBatiment)."'");
+		$res = App_Mysql::getInstance()->query("SELECT numeroSalle,nomBat,capacite,specifications FROM Salle WHERE numeroSalle='".App_Mysql::getInstance()->quote($numeroSalle)."' AND nomBat='".App_Mysql::getInstance()->quote($nomBatiment)."'");
 		if($tuple = App_Mysql::getInstance()->fetchArray($res)) {
-			$ret=new Model_Salle($tuple["numeroSalle"],$tuple["nomBatiment"],$tuple["Capacite"],$tuple["Specifications"]);
+			$ret=new Model_Salle($tuple["numeroSalle"],$tuple["nomBat"],$tuple["capacite"],$tuple["specifications"]);
 		}
 		return $ret;
 	}
 	
-	
+	public static function load($id) {
+		$ret=null;
+		//TODO
+		return $ret;
+	}
 }
 ?>
