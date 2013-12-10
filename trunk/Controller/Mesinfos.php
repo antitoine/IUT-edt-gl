@@ -1,17 +1,18 @@
 <?php
-class Controller_Modifications implements Controller
+class Controller_Mesinfos implements Controller
 {
 	public function indexAction()
 	{
 		$user = App_Session::verifierSession();
 		if (!is_null($user)) {
-			$this->consultationRecherche();
+            $var["user"] = $user;
+			$this->modifier($var);
 		} else {
 			header ('Location: '.App_Request::getUrl());
 		}
 	}
 	
-	public function modifier()
+	public function modifier($var)
 	{
 		if (!empty(App_Request::getParam("envoi"))) {
 			$user_id= trim(App_Request::getParam("user_id"));// recupere l'id de l'utilisateur courant
@@ -37,8 +38,10 @@ class Controller_Modifications implements Controller
 			$var["user"]=$user;
 			$view = new App_View('mesinfos.php');
 			$view->render($var);
-			
-		}	
-			
+		} else {
+            $view = new App_View('mesinfos.php');
+            $view->render($var);
+        }
+    }
 }
 			
