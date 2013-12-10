@@ -2,17 +2,20 @@
 
 class Controller_Modifier implements Controller
 {
-    public function indexAction() // Controller par defaut -> Permet la connexion
+    public function indexAction()
     {
         $user = App_Session::verifierSession();
         if (is_null($user) && $user->getType() > 0) {
+            $var = array(
+                "admin" => true
+            );
             if (!empty(trim(App_Request::getParam("add_cours")))) {
-                $this->ajoutCours();
+                $this->ajoutCours($var);
             } else if (!empty(trim(App_Request::getParam("search_cours")))) {
-                $this->modificationCours();
+                $this->modificationCours($var);
             } else {
                 $view = new App_View('modifier_cours.php');
-                $view->render();
+                $view->render($var);
             }
         } else {
             header ('Location: '.App_Request::getUrl());

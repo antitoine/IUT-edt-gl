@@ -22,7 +22,7 @@
                         <li><a <?php if (App_Request::isCurrent()): ?>id="item-actif"<?php endif ?> href="<?php echo App_Request::getUrl() ?>">Accueil</a></li>
                         <li><a <?php if (App_Request::isCurrent('consultation')): ?>id="item-actif"<?php endif ?> href="<?php echo App_Request::getUrl('consultation') ?>">Consulter</a></li>
                         <?php if (isset($var["admin"]) && $var["admin"]): ?>
-                            <li><a <?php if (App_Request::isCurrent('modification')): ?>id="item-actif"<?php endif ?> href="<?php echo App_Request::getUrl('modification') ?>">Modifier</a></li>
+                            <li><a <?php if (App_Request::isCurrent('modifier')): ?>id="item-actif"<?php endif ?> href="<?php echo App_Request::getUrl('modifier') ?>">Modifier</a></li>
                         <?php endif ?>
                         <li><a <?php if (App_Request::isCurrent('mesinfos')): ?>id="item-actif"<?php endif ?> href="<?php echo App_Request::getUrl('mesinfos'); ?>">Mes informations</a></li>
                         <li><a <?php if (App_Request::isCurrent('Index','deconnexion')): ?>id="item-actif"<?php endif ?> href="<?php echo App_Request::getUrl('Index','deconnexion'); ?>">Déconnexion</a></li>
