@@ -1,8 +1,8 @@
 <?php include_once 'Templates/header.php'; ?>
     <div class="content">
-        <form class ='formulaire-side-left' method='post' action="<?php echo App_Request::getUrl('modifier'); ?>">
+        <form class ='formulaire' method='post' action="<?php echo App_Request::getUrl('modifier','valider'); ?>">
             <fieldset>
-                <legend>Ajouter un cours</legend>
+                <legend>Modifier un cours</legend>
                 <?php if (isset($var["prob_ajout"]) && $var["prob_ajout"]): ?>
                     <p>Problème à l'ajout, l'un des champs (sauf description) doit être vide ou non conforme</p>
                 <?php endif ?>
@@ -24,7 +24,7 @@
                         <option value="">Séléctionnez une salle</option>
                         <?php if (isset($var["listSalle"])):
                                 for($i=0;$i<count($var["listSalle"]["nomBat"]);$i++): ?>
-                                    <option value="<?php echo $i ?>"><?php echo $var["listSalle"]["nomBat"][$i]; echo $var["listSalle"]["numeroSalle"][$i] ?></option>
+                                    <option <?php if ($var["salle"] == ($var["listSalle"]["nomBat"][$i].$var["listSalle"]["numeroSalle"][$i])): ?>selected="selected"<?php endif ?> value="<?php echo $i ?>"><?php echo $var["listSalle"]["nomBat"][$i]; echo $var["listSalle"]["numeroSalle"][$i] ?></option>
                                 <?php endfor ?>
                         <?php endif ?>
                     </select>
@@ -36,7 +36,7 @@
                             <option value="">Séléctionnez un professeur</option>
                             <?php if (isset($var["listProf"])):
                                 for($i=0;$i<count($var["listProf"]["id"]);$i++): ?>
-                                    <option value="<?php echo $i ?>"><?php echo $var["listProf"]["id"][$i]." (".$var["listProf"]["nom"][$i]." ".$var["listProf"]["prenom"][$i].")" ?></option>
+                                    <option <?php if ($var["prof"] == $var["listProf"]["id"][$i]): ?>selected="selected"<?php endif ?> value="<?php echo $i ?>"><?php echo $var["listProf"]["id"][$i]." (".$var["listProf"]["nom"][$i]." ".$var["listProf"]["prenom"][$i].")" ?></option>
                                 <?php endfor ?>
                             <?php endif ?>
                         </select>
@@ -50,7 +50,7 @@
                         <option value="">Séléctionnez un groupe de TD</option>
                         <?php if (isset($var["listGroup"])):
                             for($i=0;$i<count($var["listGroup"]);$i++): ?>
-                                <option value="<?php echo $i ?>"><?php echo $var["listGroup"][$i] ?></option>
+                                <option <?php if ($var["grptd"] == $var["listGroup"][$i]): ?>selected="selected"<?php endif ?> value="<?php echo $i ?>"><?php echo $var["listGroup"][$i] ?></option>
                             <?php endfor ?>
                         <?php endif ?>
                     </select>
@@ -61,7 +61,7 @@
                         <option value="">Séléctionnez une matière</option>
                         <?php if (isset($var["listMatiere"])):
                             for($i=0;$i<count($var["listMatiere"]);$i++): ?>
-                                <option value="<?php echo $var["listMatiere"][$i]->getNomMatiere() ?>"><?php echo $var["listMatiere"][$i]->getNomMatiere() ?></option>
+                                <option <?php if ($var["matiere"] == $var["listMatiere"][$i]->getNomMatiere()): ?>selected="selected"<?php endif ?> value="<?php echo $var["listMatiere"][$i]->getNomMatiere() ?>"><?php echo $var["listMatiere"][$i]->getNomMatiere() ?></option>
                             <?php endfor ?>
                         <?php endif ?>
                     </select>
@@ -71,30 +71,7 @@
                     <textarea name="description" id="description"><?php if (isset($var["description"])) { echo $var["description"]; } ?></textarea>
                 </p>
                 <p>
-                    <input type="hidden" value="ok" name="add_cours" id="add_cours" />
-                    <input type='submit' value='Ajouter' name='submit' id='submit' />
-                </p>
-            </fieldset>
-        </form>
-        <form class ='formulaire-side-right' method='post' action="<?php echo App_Request::getUrl('modifier'); ?>">
-            <fieldset>
-                <legend>Modifier un cours</legend>
-                <?php if (isset($var["prob_ajout"]) && $var["prob_ajout"]): ?>
-                    <p>Problème à la modification</p>
-                <?php endif ?>
-                <p>
-                    <label for='cours'>Cours :</label>
-                    <select name="cours">
-                        <option value="">Séléctionnez un cours</option>
-                        <?php if (isset($var["listCours"])):
-                            for($i=0;$i<count($var["listCours"]);$i++): ?>
-                                <option value="<?php echo $i ?>"><?php echo $var["listCours"][$i]->getDate()." à ".$var["listCours"][$i]->getHeureDebut()." jusqu'à ".$var["listCours"][$i]->getHeureFin()." pour le ".$var["listCours"][$i]->getGroupe()." de ".$var["listCours"][$i]->getMatiere() ?></option>
-                            <?php endfor ?>
-                        <?php endif ?>
-                    </select>
-                </p>
-                <p>
-                    <input type="hidden" value="ok" name="modifier_cours" id="modifier_cours" />
+                    <input type="hidden" value="<?php echo $var["idCours"] ?>" name="idCours" id="idCours" />
                     <input type='submit' value='Modifier' name='submit' id='submit' />
                 </p>
             </fieldset>

@@ -174,7 +174,7 @@ footer {
     padding-bottom : 10px;
     background: none repeat scroll 0 0 #365679;
     width:100%;
-    bottom:0;
+    margin-top: 100px;
 }
 
 #footer-txt {
@@ -192,7 +192,7 @@ footer {
 }
 
 
-a.link:link, a.link:visited
+footer a.link:link, footer a.link:visited
 {
    color: #FFFFFF;
 }

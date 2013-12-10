@@ -3,7 +3,7 @@
         <?php if (!empty($var["listCours"])) { 
         		for($j=0;$j<count($var["listCours"]);$j++){ ?>
             <table class="EDT">
-                <caption>Emploi du temps</caption>
+                <caption>Emploi du temps des 4 prochains jours pour votre recherche</caption>
 
                 <thead> <!-- En-tête du tableau -->
                 <tr>
@@ -22,7 +22,7 @@
                         <td><?php echo $var["listCours"][$j][$i]->getDate(); ?></td>
                         <td><?php echo $var["listCours"][$j][$i]->getHeureDebut(); ?></td>
                         <td><?php echo $var["listCours"][$j][$i]->getHeureFin(); ?></td>
-                        <td><?php echo $var["listCours"][$j][$i]->getBatiment(); echo $var["listCours"][$j][$i]->getnunSalle(); ?></td>
+                        <td><?php echo $var["listCours"][$j][$i]->getBatiment(); echo $var["listCours"][$j][$i]->getnumSalle(); ?></td>
                         <td><?php echo $var["listCours"][$j][$i]->getMatiere(); ?></td>
                         <td><?php echo $var["listCours"][$j][$i]->getDescription(); ?></td>
                     </tr>
