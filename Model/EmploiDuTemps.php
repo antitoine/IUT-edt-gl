@@ -37,10 +37,10 @@ class Model_EmploiDuTemps
         $array_cours = array();
         $i = 0;
         while ($tuple = App_Mysql::getInstance()->fetchArray($res)) {
-            $array_cours[$i] = new Model_Cours($tuple['idCours'],$tuple['idProf'],$tuple['nomMatiere'],$tuple['Groupe'],$tuple['numeroSalle'],$tuple['nomBat'],$tuple['heureDebut'],$tuple['heureFin'],$tuple['Date'],$tuple['descriptionCours']);
+            $array_cours[0][$i] = new Model_Cours($tuple['idCours'],$tuple['idProf'],$tuple['nomMatiere'],$tuple['Groupe'],$tuple['numeroSalle'],$tuple['nomBat'],$tuple['heureDebut'],$tuple['heureFin'],$tuple['Date'],$tuple['descriptionCours']);
             $i++;
         }
-        if (count($array_cours)==0) {
+        if (count($array_cours[0])==0) {
             return null;
         }
         return $array_cours;
@@ -59,12 +59,13 @@ class Model_EmploiDuTemps
         }
         /** @var $array_cours Array de tous les cours */
         $array_cours = array();
-        $i = 0;
+        $array_cours[0] = array();
+        $i=0;
         while ($tuple = App_Mysql::getInstance()->fetchArray($res)) {
-            $array_cours[$i] = new Model_Cours($tuple['idCours'],$tuple['idProf'],$tuple['nomMatiere'],$tuple['Groupe'],$tuple['numeroSalle'],$tuple['nomBat'],$tuple['heureDebut'],$tuple['heureFin'],$tuple['Date'],$tuple['descriptionCours']);
+            $array_cours[0][$i] = new Model_Cours($tuple['idCours'],$tuple['idProf'],$tuple['nomMatiere'],$tuple['Groupe'],$tuple['numeroSalle'],$tuple['nomBat'],$tuple['heureDebut'],$tuple['heureFin'],$tuple['Date'],$tuple['descriptionCours']);
             $i++;
         }
-        if (count($array_cours)==0) {
+        if (count($array_cours[0])==0) {
             return null;
         }
         return $array_cours;
@@ -80,29 +81,14 @@ class Model_EmploiDuTemps
         if (is_null($nom) || is_null($prenom)) {
             return null;
         }
-        $tabUser = Model_User::load($nom,$prenom);
+        $tabUser = Model_User::loadByNomPrenom($nom,$prenom);
         if (is_null($tabUser)) {
             return null;
         }
-        
-        else if ($user->getType() == 0) {
-            $user = Model_Etudiant::loadByNomPrenom($id_user);
-            $res = App_Mysql::getInstance()->query("SELECT * FROM cours WHERE Groupe = '".App_Mysql::getInstance()->quote($user->getIdGrp())."' AND Date >= CURDATE() AND Date < DATE_ADD(CURDATE(), INTERVAL 5 DAY) ORDER BY Date ASC");
-        } else {
-            $res = App_Mysql::getInstance()->query("SELECT * FROM cours WHERE Date >= CURDATE() AND Date < DATE_ADD(CURDATE(), INTERVAL 5 DAY) AND idProf = '".App_Mysql::getInstance()->quote($user->getId())."' ORDER BY Date ASC");
+        for($i=0;$i<count($tabUser);$i++){
+        	$tabEdT[$i]=Model_EmploiDuTemps::searchByUser($tabUser[$i]->getId())[0];
         }
-        /** @var $array_cours Array de tous les cours */
-        $array_cours = array();
-        $i = 0;
-        while ($tuple = App_Mysql::getInstance()->fetchArray($res)) {
-            $array_cours[$i] = new Model_Cours($tuple['idCours'],$tuple['idProf'],$tuple['nomMatiere'],$tuple['Groupe'],$tuple['numeroSalle'],$tuple['nomBat'],$tuple['heureDebut'],$tuple['heureFin'],$tuple['Date'],$tuple['descriptionCours']);
-            $i++;
-        }
-        if (count($array_cours)==0) {
-            return null;
-        }
-        return $array_cours;
-        return null;
+        return $tabEdT;
     }
 
     /**
