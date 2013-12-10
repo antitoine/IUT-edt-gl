@@ -12,7 +12,7 @@ class Controller_Modifier implements Controller
                 $this->modificationCours();
             } else {
                 $view = new App_View('modifier_cours.php');
-                $view->render(null);
+                $view->render();
             }
         } else {
             header ('Location: '.App_Request::getUrl());
