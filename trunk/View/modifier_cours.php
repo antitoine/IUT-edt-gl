@@ -4,27 +4,36 @@
             <fieldset>
                 <legend>Ajouter un cours</legend>
                 <p>
-                    <label for='identifiant'>Identifiant :</label>
-                    <input type='text' placeholder='Identifiant...' name='id_user' id='id_user' value='<?php if (isset($var["id_user"])) { echo $var["id_user"]; } ?>' />
+                    <label for='date'></label>
+                    <input type='text' placeholder='2013-12-09 ...' name='date' id='date' value='<?php if (isset($var["date"])) { echo $var["date"]; } ?>' />
                 </p>
-                <p>ou</p>
                 <p>
-                    <label for='nom'>Nom :</label>
-                    <input type='text' placeholder='Nom...' name='nom' id='nom' value='<?php if (isset($var["nom"])) { echo $var["nom"]; } ?>' />
-                    <label for='prenom'>Prénom :</label>
-                    <input type='text' placeholder='Prénom...' name='prenom' id='prenom' value='<?php if (isset($var["prenom"])) { echo $var["prenom"]; } ?>' />
+                    <label for='heured'></label>
+                    <input type='text' placeholder='09:45:00 ...' name='heured' id='heured' value='<?php if (isset($var["heured"])) { echo $var["heured"]; } ?>' />
                 </p>
-                <p>ou</p>
                 <p>
-                    <label for='grptd'>Groupe de TD :</label>
-                    <input type='text' placeholder='Groupe de TD...' name='grptd' id='grptd' value='<?php if (isset($var["grptd"])) { echo $var["grptd"]; } ?>' />
+                    <label for='heuref'></label>
+                    <input type='text' placeholder='10:45:00 ...' name='heuref' id='heuref' value='<?php if (isset($var["heuref"])) { echo $var["heuref"]; } ?>' />
                 </p>
-                <p>ou</p>
                 <p>
-                    <label for='bat'>Batiment :</label>
-                    <input type='text' placeholder='Batiment...' name='bat' id='bat' value='<?php if (isset($var["bat"])) { echo $var["bat"]; } ?>' />
-                    <label for='salle'>Numéro salle :</label>
-                    <input type='text' placeholder='Numéro salle...' name='salle' id='salle' value='<?php if (isset($var["salle"])) { echo $var["salle"]; } ?>' />
+                    <label for='salle'></label>
+                    <select name="salle">
+                        <option value="">...</option>
+                    </select>
+                </p>
+                <?php if (isset($var["not_prof"]) && $var["not_prof"]) { ?>
+                    <p>
+                        <label for='prof'></label>
+                        <select name="prof">
+                            <option value="">...</option>
+                        </select>
+                    </p>
+                <?php } ?>
+                <p>
+                    <label for='grptd'></label>
+                    <select name="grptd">
+                        <option value="">...</option>
+                    </select>
                 </p>
                 <p>
                     <input type="hidden" value="ok" name="add_cours" id="add_cours" />
