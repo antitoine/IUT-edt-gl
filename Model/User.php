@@ -79,9 +79,9 @@ class Model_User implements Model
 		$res = App_Mysql::getInstance()->query("SELECT * FROM Personne WHERE droit='1'");
 		$i=0;
 		while($tuple = App_Mysql::getInstance()->fetchArray($res)) {
-			$ret[$i]["id"]=$tuple["identifiant"];
-			$ret[$i]["nom"]=$tuple["nom"];
-			$ret[$i]["prenom"]=$tuple["prenom"];
+			$ret["id"][$i]=$tuple["identifiant"];
+			$ret["nom"][$i]=$tuple["nom"];
+			$ret["prenom"][$i]=$tuple["prenom"];
 			$i++;
 		}
 		return $ret;
