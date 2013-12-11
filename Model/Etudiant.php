@@ -6,14 +6,13 @@ class Model_Etudiant extends Model_User implements Model
 
     /**
      * Constructeur d'un etud
-     * @param null $id
-     * @param null $email
-     * @param null $nom
-     * @param null $prenom
-     * @param null $mdp
-     * @param null $type
-     * @param null $idGrp
-     * @internal param $
+     * @param int $id
+     * @param String $email
+     * @param String $nom
+     * @param String $prenom
+     * @param String $mdp
+     * @param int $type
+     * @param id $idGrp
      */
 	public function __construct ($id=null,$email=null,$nom=null,$prenom=null,$mdp=null,$type=null,$idGrp=null) {
 		parent::__construct($id,$email,$nom,$prenom,$mdp,$type);
@@ -21,7 +20,7 @@ class Model_Etudiant extends Model_User implements Model
 	}
 	
 	/**
-	* Sauvegarde ou update
+	* Sauvegarde ou update d'untuple dans la base de données
 	*/
 	public function save() {
         parent::save();
@@ -47,7 +46,7 @@ class Model_Etudiant extends Model_User implements Model
 		}
 		return $ret;
 	}
-	
+	//getter & setter
 	public function getIdGrp(){ return $this->idGrp; }
 	public function setIdGrp($s){ $this->idGrp=$s; }
 }
