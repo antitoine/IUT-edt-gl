@@ -20,6 +20,14 @@ class Controller_Consultation implements Controller
 	*/
 	public function consultationRecherche($var)
 	{
+        $listGroup = Model_GroupeTD::loadAll();
+        if (!is_null($listGroup)) {
+            $var["listGroup"] = $listGroup;
+        }
+        $listSalle = Model_Salle::loadAll();
+        if (!is_null($listSalle)) {
+            $var["listSalle"] = $listSalle;
+        }
         if (!empty(App_Request::getParam("envoi"))) {
             $listCours = null;
             if (!empty(trim(App_Request::getParam("id_user")))) {
@@ -32,9 +40,9 @@ class Controller_Consultation implements Controller
             } else if (!empty(trim(App_Request::getParam("grptd")))) {
                 $grptd = trim(App_Request::getParam("grptd"));
                 $listCours = Model_EmploiDuTemps::searchByGroupTD($grptd);
-            } else if (!empty(trim(App_Request::getParam("bat"))) && !empty(trim(App_Request::getParam("salle")))) {
-                $bat = trim(App_Request::getParam("bat"));
-                $salle = trim(App_Request::getParam("salle"));
+            } else if (!empty(App_Request::getParam("salle"))) {
+                $salle = $var["listSalle"]["numeroSalle"][App_Request::getParam("salle")];
+                $bat = $var["listSalle"]["nomBat"][App_Request::getParam("salle")];
                 $listCours = Model_EmploiDuTemps::searchByBatimentSalle($bat,$salle);
             }
             if(!is_null($listCours)){
