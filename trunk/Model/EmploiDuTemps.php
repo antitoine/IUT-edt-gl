@@ -33,17 +33,16 @@ class Model_EmploiDuTemps
         } else {
             $res = App_Mysql::getInstance()->query("SELECT * FROM cours WHERE Date >= CURDATE() AND Date < DATE_ADD(CURDATE(), INTERVAL 5 DAY) AND idProf = '".App_Mysql::getInstance()->quote($user->getId())."' ORDER BY Date ASC");
         }
-        /** @var $array_cours Array de tous les cours */
-        $array_cours = array();
+        $array_edt = array();
         $i = 0;
         while ($tuple = App_Mysql::getInstance()->fetchArray($res)) {
-            $array_cours[0][$i] = new Model_Cours($tuple['idCours'],$tuple['idProf'],$tuple['nomMatiere'],$tuple['Groupe'],$tuple['numeroSalle'],$tuple['nomBat'],$tuple['heureDebut'],$tuple['heureFin'],$tuple['Date'],$tuple['descriptionCours']);
+            $array_edt[0][$i] = new Model_Cours($tuple['idCours'],$tuple['idProf'],$tuple['nomMatiere'],$tuple['Groupe'],$tuple['numeroSalle'],$tuple['nomBat'],$tuple['heureDebut'],$tuple['heureFin'],$tuple['Date'],$tuple['descriptionCours']);
             $i++;
         }
-        if (count($array_cours)==0) {
+        if (count($array_edt)==0) {
             return null;
         }
-        return $array_cours;
+        return $array_edt;
     }
 
     /**
