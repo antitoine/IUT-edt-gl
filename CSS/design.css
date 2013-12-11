@@ -168,7 +168,7 @@ header {
     width: 100%;
 }
 
-footer {
+.footer {
     clear: both;
     padding-top: 10px;
     padding-bottom : 10px;
