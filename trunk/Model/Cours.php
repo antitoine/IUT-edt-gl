@@ -13,7 +13,20 @@ class Model_Cours implements Model
     private $date;
     private $grp;
     private $idProf;
-
+	
+	/**
+	 * 	  
+	 * @param int $idCours
+	 * @param int $idProf
+	 * @param String $nomMatiere
+	 * @param String $grp
+	 * @param int $numSalle
+	 * @param String $nomBat
+	 * @param Time $heureDeb
+	 * @param Time $heureFin
+	 * @param Date $date
+	 * @param String $descrip
+	 */
     public function __construct( $idCours=null,$idProf= null,$nomMatiere= null,$grp= null,$numSalle= null,$nomBat= null, $heureDeb= null,$heureFin= null,$date= null,$descrip = null){
             $this->idCours =$idCours;
             $this->descrip =$descrip;
@@ -49,7 +62,7 @@ class Model_Cours implements Model
     public function setProfesseur($var){ $this->idProf=$var;}
 
     /**
-     * Sauvegarde ou update
+     * Sauvegarde ou mise à jour d'un tuple dans la base de données
      */
     public function save() {
         $res = App_Mysql::getInstance()->query("SELECT idCours FROM cours WHERE idCours='".App_Mysql::getInstance()->quote($this->idCours)."'");
@@ -61,7 +74,12 @@ class Model_Cours implements Model
             }
         }
     }
-
+	/**
+	 * @param int $id
+	 * @return Ambigous <NULL, Model_Cours>
+	 * retourne: l'instance de cours identifié par $id dans la base de données si elle existe, sinn retourne  null 
+	 */
+    
     public static function load($id) {
         $ret=null;
         $res = App_Mysql::getInstance()->query("SELECT * FROM cours WHERE idCours='".App_Mysql::getInstance()->quote($id)."'");
@@ -70,7 +88,9 @@ class Model_Cours implements Model
         }
         return $ret;
     }
-
+	/**
+	 * Retourne un tableau de toutes les instances de cours qui sont dans la base de données
+	 */
     public static function loadAll() {
         $ret=null;
         $res = App_Mysql::getInstance()->query("SELECT * FROM cours");
@@ -81,7 +101,12 @@ class Model_Cours implements Model
         }
         return $ret;
     }
-
+	/**
+	 * 
+	 * @param int $idProf
+	 * @return Ambigous <NULL, Model_Cours>
+	 * Retourne le tableau de tout les tuples ayants un identifiant proseeur qui correspond à $idprof
+	 */
     public static function loadAllByIdProf($idProf) {
         $ret=null;
         $res = App_Mysql::getInstance()->query("SELECT * FROM cours WHERE idProf= '".App_Mysql::getInstance()->quote($idProf)."'");
