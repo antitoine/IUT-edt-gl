@@ -86,7 +86,7 @@ class Model_EmploiDuTemps
             return null;
         }
         for($i=0;$i<count($tabUser);$i++){
-        	$tabEdT[$i]=Model_EmploiDuTemps::searchByUser($tabUser[$i]->getId());
+        	$tabEdT[$i]=Model_EmploiDuTemps::searchByUser($tabUser[$i]->getId())[0];
         }
         return $tabEdT;
     }
