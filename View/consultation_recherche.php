@@ -17,14 +17,26 @@
                  <p>ou</p>
                  <p>
                      <label for='grptd'>Groupe de TD :</label>
-                     <input type='text' placeholder='Groupe de TD...' name='grptd' id='grptd' value='<?php if (isset($var["grptd"])) { echo $var["grptd"]; } ?>' />
+                     <select name="grptd">
+                         <option value="">Séléctionnez un groupe de TD</option>
+                         <?php if (isset($var["listGroup"])):
+                             for($i=0;$i<count($var["listGroup"]);$i++): ?>
+                                 <option value="<?php echo $var["listGroup"][$i] ?>"><?php echo $var["listGroup"][$i] ?></option>
+                             <?php endfor ?>
+                         <?php endif ?>
+                     </select>
                  </p>
                  <p>ou</p>
                  <p>
-                     <label for='bat'>Batiment :</label>
-                     <input type='text' placeholder='Batiment...' name='bat' id='bat' value='<?php if (isset($var["bat"])) { echo $var["bat"]; } ?>' />
-                     <label for='salle'>Numéro salle :</label>
-                     <input type='text' placeholder='Numéro salle...' name='salle' id='salle' value='<?php if (isset($var["salle"])) { echo $var["salle"]; } ?>' />
+                     <label for='salle'>Salle :</label>
+                     <select name="salle">
+                         <option value="">Séléctionnez une salle</option>
+                         <?php if (isset($var["listSalle"])):
+                             for($i=0;$i<count($var["listSalle"]["nomBat"]);$i++): ?>
+                                 <option value="<?php echo $i ?>"><?php echo $var["listSalle"]["nomBat"][$i]; echo $var["listSalle"]["numeroSalle"][$i] ?></option>
+                             <?php endfor ?>
+                         <?php endif ?>
+                     </select>
                  </p>
                  <p>
                      <input type="hidden" value="ok" name="envoi" id="envoi" />
