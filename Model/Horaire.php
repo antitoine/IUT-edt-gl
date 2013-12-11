@@ -52,17 +52,17 @@ class Model_Horaire implements Model
 			}
 		}
 	}
-	
+
 	// return null si aucun user n'a cet id sinon une instance de la classe User
-	public static function load($numeroSalle,$nomBatiment) {
+	public static function load($arrayID) {
 		$ret=null;
-		$res = App_Mysql::getInstance()->query("SELECT heureDebut,heureFin,Date FROM horaire WHERE heureDebut='".App_Mysql::getInstance()->quote($this->heureDebut."' AND heureFin='".App_Mysql::getInstance()->quote($this->heureFin)."'AND date='".App_Mysql::getInstance()->quote($this->Date)."'"));
+		$res = App_Mysql::getInstance()->query("SELECT heureDebut,heureFin,Date FROM horaire WHERE heureDebut='".App_Mysql::getInstance()->quote($arrayID["heured"]."' AND heureFin='".App_Mysql::getInstance()->quote($arrayID["heuref"])."'AND date='".App_Mysql::getInstance()->quote($arrayID["date"])."'"));
 		if($tuple = App_Mysql::getInstance()->fetchArray($res)) {
 			$ret=new Model_Horaire($tuple["heureDebut"],$tuple["heureFin"],$tuple["Date"]);
 		}
 		return $ret;
 	}
-	
-	
+
+
 }
 ?>

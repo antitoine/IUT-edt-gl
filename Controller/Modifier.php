@@ -108,6 +108,8 @@ class Controller_Modifier implements Controller
         if (isset($date) && isset($heured) && isset($heuref)
             && isset($numSalle) && isset($nomBat) && isset($idprof)
             && isset($groupe) && isset($matiere)) {
+            //$newhorraire = new Model_Horaire($heured,$heuref,$date);
+            //$newhorraire->save();
             $newCours = new Model_Cours(null,$idprof,$matiere,$groupe,$numSalle,$nomBat,$heured,$heuref,$date);
             if (isset($description)) {
                 $newCours->setDescription($description);
