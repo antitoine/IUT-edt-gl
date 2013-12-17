@@ -15,13 +15,14 @@ class Controller_Mesinfos implements Controller
 	
 	public function modifier($var)
 	{
-		if (!empty(App_Request::getParam("send"))) {
-			if (!empty(trim(App_Request::getParam('mdp')))) {
-				$mdp = trim(App_Request::getParam('mdp'));
+        $send = App_Request::getParam("send");
+		if (!empty($send)) {
+            $mdp = trim(App_Request::getParam('mdp'));
+			if (!empty($mdp)) {
                 $var["user"]->setMdp(md5($mdp));
 			}
-			if(!empty(trim(App_Request::getParam('email')))){
-				$email = trim(App_Request::getParam('email'));// recupere le nouveau email
+            $email = trim(App_Request::getParam('email'));
+			if(!empty($email)){
 				$syntaxe="#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#";
 				if(preg_match($syntaxe,$email)){
                     $var["user"]->setEmail($email);
