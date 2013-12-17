@@ -40,7 +40,9 @@ class Controller_Modifier implements Controller
             if (!is_null($listMatiere)) {
                 $var["listMatiere"] = $listMatiere;
             }
-            if (!empty(App_Request::getParam("add_cours"))) {
+            $add_cours = App_Request::getParam("add_cours");
+            $modifier_cours = App_Request::getParam("modifier_cours");
+            if (!empty($add_cours)) {
                 if ($this->ajoutCours($var)) {
                     $view = new App_View('ajout_cours_reussi.php');
                     $view->render($var);
@@ -49,8 +51,9 @@ class Controller_Modifier implements Controller
                     $view = new App_View('modifier_cours.php');
                     $view->render($var);
                 }
-            } else if (!empty(App_Request::getParam("modifier_cours"))) {
-                if (!empty(App_Request::getParam("cours"))) {
+            } else if (!empty($modifier_cours)) {
+                $cours = App_Request::getParam("cours");
+                if (!empty($cours)) {
                     $cours = $var["listCours"][App_Request::getParam("cours")];
                     $var["idCours"] = $cours->getIdCours();
                     $var["date"] = $cours->getDate();
@@ -78,36 +81,31 @@ class Controller_Modifier implements Controller
 
     public function ajoutCours($var)
     {
-        if (!empty(trim(App_Request::getParam("date")))) {
-            $date = trim(App_Request::getParam("date"));
-        }
-        if (!empty(trim(App_Request::getParam("heured")))) {
-            $heured = trim(App_Request::getParam("heured"));
-        }
-        if (!empty(trim(App_Request::getParam("heuref")))) {
-            $heuref = trim(App_Request::getParam("heuref"));
-        }
-        if (!empty(App_Request::getParam("salle"))) {
+        $date = trim(App_Request::getParam("date"));
+        $heured = trim(App_Request::getParam("heured"));
+        $heuref = trim(App_Request::getParam("heuref"));
+        $salle = App_Request::getParam("salle");
+        if (!empty($salle)) {
             $numSalle = $var["listSalle"]["numeroSalle"][App_Request::getParam("salle")];
             $nomBat = $var["listSalle"]["nomBat"][App_Request::getParam("salle")];
         }
-        if ($var["not_prof"] && !empty(App_Request::getParam("prof"))) {
+        if ($var["not_prof"]) {
             $idprof = $var["listProf"]["id"][App_Request::getParam("prof")];
-        } else if (!$var["not_prof"]) {
+        } else {
             $idprof = $var["user"]->getId();
         }
-        if (!empty(App_Request::getParam("grptd"))) {
+        $groupe = App_Request::getParam("grptd");
+        if (!empty($groupe)) {
             $groupe = $var["listGroup"][App_Request::getParam("grptd")];
         }
-        if (!empty(App_Request::getParam("matiere"))) {
-            $matiere = App_Request::getParam("matiere");
-        }
-        if (!empty(trim(App_Request::getParam("description")))) {
-            $description = trim(App_Request::getParam("description"));
-        }
+        $matiere = App_Request::getParam("matiere");
+        $description = trim(App_Request::getParam("description"));
         if (isset($date) && isset($heured) && isset($heuref)
             && isset($numSalle) && isset($nomBat) && isset($idprof)
-            && isset($groupe) && isset($matiere)) {
+            && isset($groupe) && isset($matiere)
+            && !empty($date) && !empty($heured) && !empty($heuref)
+            && !empty($numSalle) && !empty($nomBat) && !empty($idprof)
+            && !empty($groupe) && !empty($matiere)) {
             $newhoraire = new Model_Horaire($heured,$heuref,$date);
             $newhoraire->save();
             $newCours = new Model_Cours(null,$idprof,$matiere,$groupe,$numSalle,$nomBat,$heured,$heuref,$date);
@@ -123,41 +121,34 @@ class Controller_Modifier implements Controller
 
     public function modifierCours($var)
     {
-        if (!empty(App_Request::getParam("idCours"))) {
-            $idCours = App_Request::getParam("idCours");
-        }
-        if (!empty(trim(App_Request::getParam("date")))) {
-            $date = trim(App_Request::getParam("date"));
-        }
-        if (!empty(trim(App_Request::getParam("heured")))) {
-            $heured = trim(App_Request::getParam("heured"));
-        }
-        if (!empty(trim(App_Request::getParam("heuref")))) {
-            $heuref = trim(App_Request::getParam("heuref"));
-        }
-        if (!empty(App_Request::getParam("salle"))) {
+        $idCours = App_Request::getParam("idCours");
+        $date = trim(App_Request::getParam("date"));
+        $heured = trim(App_Request::getParam("heured"));
+        $heuref = trim(App_Request::getParam("heuref"));
+        $salle = App_Request::getParam("salle");
+        if (!empty($salle)) {
             $numSalle = $var["listSalle"]["numeroSalle"][App_Request::getParam("salle")];
             $nomBat = $var["listSalle"]["nomBat"][App_Request::getParam("salle")];
         }
-        if ($var["not_prof"] && !empty(App_Request::getParam("prof"))) {
+        if ($var["not_prof"]) {
             $idprof = $var["listProf"]["id"][App_Request::getParam("prof")];
-        } else if (!$var["not_prof"]) {
+        } else {
             $idprof = $var["user"]->getId();
         }
-        if (!empty(App_Request::getParam("grptd"))) {
+        $groupe = App_Request::getParam("grptd");
+        if (!empty($groupe)) {
             $groupe = $var["listGroup"][App_Request::getParam("grptd")];
         }
-        if (!empty(App_Request::getParam("matiere"))) {
-            $matiere = App_Request::getParam("matiere");
-        }
-        if (!empty(trim(App_Request::getParam("description")))) {
-            $description = trim(App_Request::getParam("description"));
-        }
+        $matiere = App_Request::getParam("matiere");
+        $description = trim(App_Request::getParam("description"));
         if (isset($idCours) && isset($date) && isset($heured) && isset($heuref)
             && isset($numSalle) && isset($nomBat) && isset($idprof)
-            && isset($groupe) && isset($matiere)) {
+            && isset($groupe) && isset($matiere)
+            && !empty($idCours) && !empty($date) && !empty($heured) && !empty($heuref)
+            && !empty($numSalle) && !empty($nomBat) && !empty($idprof)
+            && !empty($groupe) && !empty($matiere)) {
             $OldCours = Model_Cours::load($idCours);
-            if (isset($description)) {
+            if (isset($description) && !empty($description)) {
                 $OldCours->setDescription($description);
             }
             $OldCours->setDate($date);
