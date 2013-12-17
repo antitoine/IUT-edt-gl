@@ -1,5 +1,6 @@
 <?php include_once 'Templates/header.php'; ?>
     <div class="content">
+        <h3>Consulter un emploi du temps</h3>
          <form class ='formulaire' method='post' action="<?php echo App_Request::getUrl('consultation'); ?>">
              <fieldset>
                  <legend>Recherche d'un emploi du temps par ...</legend>
