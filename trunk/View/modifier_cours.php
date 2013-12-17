@@ -4,7 +4,7 @@
             <fieldset>
                 <legend>Ajouter un cours</legend>
                 <?php if (isset($var["prob_ajout"]) && $var["prob_ajout"]): ?>
-                    <p>Problème à l'ajout, l'un des champs (sauf description) doit être vide ou non conforme</p>
+                    <p class="probleme-form">Problème à l'ajout, l'un des champs (sauf description) doit être vide ou non conforme</p>
                 <?php endif ?>
                 <p>
                     <label for='date'>Date :</label>
@@ -80,7 +80,7 @@
             <fieldset>
                 <legend>Modifier un cours</legend>
                 <?php if (isset($var["prob_ajout"]) && $var["prob_ajout"]): ?>
-                    <p>Problème à la modification</p>
+                    <p class="probleme-form">Problème à la modification</p>
                 <?php endif ?>
                 <p>
                     <label for='cours'>Cours :</label>
