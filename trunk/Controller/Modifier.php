@@ -7,7 +7,8 @@ class Controller_Modifier implements Controller
         $user = App_Session::verifierSession();
         if (!is_null($user) && $user->getType() > 0) {
             $var = array(
-                "admin" => true,
+                "admin" => $user->getType() >= 2,
+                "prof" => $user->getType() >= 1,
                 "not_prof" => $user->getType() != 1,
                 "user" => $user
             );
@@ -171,7 +172,8 @@ class Controller_Modifier implements Controller
         $user = App_Session::verifierSession();
         if (!is_null($user) && $user->getType() > 0) {
             $var = array(
-                "admin" => true,
+                "admin" => $user->getType() >= 2,
+                "prof" => $user->getType() >= 1,
                 "not_prof" => $user->getType() != 1,
                 "user" => $user
             );

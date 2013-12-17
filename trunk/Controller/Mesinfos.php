@@ -6,7 +6,8 @@ class Controller_Mesinfos implements Controller
 		$user = App_Session::verifierSession();
 		if (!is_null($user)) {
             $var["user"] = $user;
-            $var["admin"] = $user->getType() > 0;
+            $var["prof"] = $user->getType() >= 1;
+            $var["admin"] = $user->getType() >= 2;
 			$this->modifier($var);
 		} else {
 			header ('Location: '.App_Request::getUrl());

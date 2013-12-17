@@ -5,7 +5,7 @@ class App_Mysql
     protected static $_instance = null;
     private $hostname = "infolimon.iutmontp.univ-montp2.fr";
     private $login = "levanl";
-    private $passwd ="123456789";
+    private $passwd ="asYVa4VchuzduUef";
     private $base ="levanl";
     private $connect = null;
 
