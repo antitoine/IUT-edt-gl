@@ -25,6 +25,12 @@ body {
     width: 48%;
 }
 
+.formulaire-side-center {
+    clear: both;
+    padding: 0 1%;
+    width: 98%;
+}
+
 /**************** HEADER ****************/
 
 

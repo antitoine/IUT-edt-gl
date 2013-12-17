@@ -29,9 +29,9 @@ class Model_EmploiDuTemps
             return null;
         } else if ($user->getType() == 0) {
             $user = Model_Etudiant::load($id_user);
-            $res = App_Mysql::getInstance()->query("SELECT * FROM cours WHERE Groupe = '".App_Mysql::getInstance()->quote($user->getIdGrp())."' AND Date >= CURDATE() AND Date < DATE_ADD(CURDATE(), INTERVAL 5 DAY) ORDER BY Date ASC");
+            $res = App_Mysql::getInstance()->query("SELECT * FROM cours WHERE Groupe = '".App_Mysql::getInstance()->quote($user->getIdGrp())."' AND Date >= CURDATE() AND Date < DATE_ADD(CURDATE(), INTERVAL 5 DAY) ORDER BY Date ASC, heureDebut ASC, heureFin ASC");
         } else {
-            $res = App_Mysql::getInstance()->query("SELECT * FROM cours WHERE Date >= CURDATE() AND Date < DATE_ADD(CURDATE(), INTERVAL 5 DAY) AND idProf = '".App_Mysql::getInstance()->quote($user->getId())."' ORDER BY Date ASC");
+            $res = App_Mysql::getInstance()->query("SELECT * FROM cours WHERE Date >= CURDATE() AND Date < DATE_ADD(CURDATE(), INTERVAL 5 DAY) AND idProf = '".App_Mysql::getInstance()->quote($user->getId())."' ORDER BY Date ASC, heureDebut ASC, heureFin ASC");
         }
         $array_edt = array();
         $i = 0;
@@ -54,7 +54,7 @@ class Model_EmploiDuTemps
         if (is_null($grp)) {
             return null;
         } else {
-            $res = App_Mysql::getInstance()->query("SELECT * FROM cours WHERE Groupe = '".App_Mysql::getInstance()->quote($grp)."' AND Date >= CURDATE() AND Date < DATE_ADD(CURDATE(), INTERVAL 5 DAY) ORDER BY Date ASC");
+            $res = App_Mysql::getInstance()->query("SELECT * FROM cours WHERE Groupe = '".App_Mysql::getInstance()->quote($grp)."' AND Date >= CURDATE() AND Date < DATE_ADD(CURDATE(), INTERVAL 5 DAY) ORDER BY Date ASC, heureDebut ASC, heureFin ASC");
         }
         /** @var $array_cours Array de tous les cours */
         $array_cours = array();
@@ -103,7 +103,7 @@ class Model_EmploiDuTemps
             return null;
         }
         else {
-            $res = App_Mysql::getInstance()->query("SELECT * FROM cours WHERE Date >= CURDATE() AND Date < DATE_ADD(CURDATE(), INTERVAL 5 DAY) AND nomBat = '".App_Mysql::getInstance()->quote($lieu->getNomBat())."' AND numeroSalle = '".App_Mysql::getInstance()->quote($lieu->getNumeroSalle())."' ORDER BY Date ASC");
+            $res = App_Mysql::getInstance()->query("SELECT * FROM cours WHERE Date >= CURDATE() AND Date < DATE_ADD(CURDATE(), INTERVAL 5 DAY) AND nomBat = '".App_Mysql::getInstance()->quote($lieu->getNomBat())."' AND numeroSalle = '".App_Mysql::getInstance()->quote($lieu->getNumeroSalle())."' ORDER BY Date ASC, heureDebut ASC, heureFin ASC");
         }
         /** @var $array_cours Array de tous les cours */
         $i = 0;

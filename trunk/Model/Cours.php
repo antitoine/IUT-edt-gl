@@ -93,7 +93,7 @@ class Model_Cours implements Model
 	 */
     public static function loadAll() {
         $ret=null;
-        $res = App_Mysql::getInstance()->query("SELECT * FROM cours");
+        $res = App_Mysql::getInstance()->query("SELECT * FROM cours WHERE Date >= NOW() ORDER BY Date DESC");
         $i=0;
         while($tuple = App_Mysql::getInstance()->fetchArray($res)) {
             $ret[$i]=new Model_Cours($tuple["idCours"],$tuple["idProf"],$tuple["nomMatiere"],$tuple["Groupe"],$tuple["numeroSalle"],$tuple["nomBat"],$tuple["heureDebut"],$tuple["heureFin"],$tuple["Date"],$tuple["descriptionCours"]);
