@@ -7,9 +7,9 @@ class Controller_Index implements Controller
     {
         $user = App_Session::verifierSession();
         if (is_null($user)) {
-            if (!empty(trim(App_Request::getParam("identifiant"))) && !empty(trim(App_Request::getParam("mdp")))) {
-                $identifiant = trim(App_Request::getParam("identifiant"));
-                $mdp_not_crypt = trim(App_Request::getParam("mdp"));
+            $identifiant = trim(App_Request::getParam("identifiant"));
+            $mdp_not_crypt = trim(App_Request::getParam("mdp"));
+            if (!empty($identifiant) && !empty($mdp_not_crypt)) {
                 $mdp = md5($mdp_not_crypt);
                 if (!Model_User::VerifierAuthentification($identifiant,$mdp)) {
                     $var = array(
