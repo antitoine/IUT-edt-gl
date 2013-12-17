@@ -7,7 +7,8 @@ class Controller_Consultation implements Controller
 		$user = App_Session::verifierSession();
 		if (!is_null($user)) {
             $var = array(
-                "admin" => $user->getType() >0
+                "admin" => $user->getType() >= 2,
+                "prof" => $user->getType() >= 1
             );
 			$this->consultationRecherche($var);
 		} else {
