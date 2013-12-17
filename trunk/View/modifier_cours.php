@@ -8,15 +8,15 @@
                 <?php endif ?>
                 <p>
                     <label for='date'>Date :</label>
-                    <input type='date' placeholder='2013-12-09 ...' name='date' id='date' value='<?php if (isset($var["date"])) { echo $var["date"]; } ?>' />
+                    <input type='text' placeholder='2013-12-09 ...' name='date' id='date' value='<?php if (isset($var["date"])) { echo $var["date"]; } ?>' />
                 </p>
                 <p>
                     <label for='heured'>Heure début :</label>
-                    <input type='time' placeholder='09:45:00 ...' name='heured' id='heured' value='<?php if (isset($var["heured"])) { echo $var["heured"]; } ?>' />
+                    <input type='text' placeholder='09:45:00 ...' name='heured' id='heured' value='<?php if (isset($var["heured"])) { echo $var["heured"]; } ?>' />
                 </p>
                 <p>
                     <label for='heuref'>Heure fin :</label>
-                    <input type='time' placeholder='10:45:00 ...' name='heuref' id='heuref' value='<?php if (isset($var["heuref"])) { echo $var["heuref"]; } ?>' />
+                    <input type='text' placeholder='10:45:00 ...' name='heuref' id='heuref' value='<?php if (isset($var["heuref"])) { echo $var["heuref"]; } ?>' />
                 </p>
                 <p>
                     <label for='salle'>Salle :</label>
