@@ -46,6 +46,11 @@ class Model_Etudiant extends Model_User implements Model
 		}
 		return $ret;
 	}
+
+    public static function remove($id) {
+        App_Mysql::getInstance()->query("DELETE FROM Etudiant WHERE idEtud='".App_Mysql::getInstance()->quote($id)."'");
+    }
+
 	//getter & setter
 	public function getIdGrp(){ return $this->idGrp; }
 	public function setIdGrp($s){ $this->idGrp=$s; }

@@ -48,11 +48,15 @@ class Model_User implements Model
 		}
 		return $ret;
 	}
-	
+
+    public static function remove($id) {
+        App_Mysql::getInstance()->query("DELETE FROM Personne WHERE identifiant='".App_Mysql::getInstance()->quote($id)."'");
+    }
+
 	// return null si aucun user n'a ce nom et ce prenom sinon un tableau d'instance de la classe User
 	public static function loadByNomPrenom($nom,$prenom) {
 		$ret=null;
-		$res = App_Mysql::getInstance()->query("SELECT * FROM Personne WHERE nom='".App_Mysql::getInstance()->quote($nom)."' AND prenom='".App_Mysql::getInstance()->quote($prenom)."'");
+		$res = App_Mysql::getInstance()->query("SELECT * FROM Personne WHERE nom='".App_Mysql::getInstance()->quote($nom)."' AND prenom='".App_Mysql::getInstance()->quote($prenom)."' ORDER BY nom ASC, prenom ASC");
 		$i=0;
 		while($tuple = App_Mysql::getInstance()->fetchArray($res)) {
 			$ret[$i]=new Model_User($tuple["identifiant"],$tuple["email"],$tuple["nom"],$tuple["prenom"],$tuple["mdp"],$tuple["droit"]);
@@ -74,7 +78,7 @@ class Model_User implements Model
 	// return null s'il n'y a aucun prof sinon un tableau d'instance de la classe User
 	public static function loadAllProf() {
 		$ret=null;
-		$res = App_Mysql::getInstance()->query("SELECT * FROM Personne WHERE droit='1'");
+		$res = App_Mysql::getInstance()->query("SELECT * FROM Personne WHERE droit='1' ORDER BY nom ASC, prenom ASC");
 		$i=0;
 		while($tuple = App_Mysql::getInstance()->fetchArray($res)) {
 			$ret["id"][$i]=$tuple["identifiant"];
@@ -84,13 +88,36 @@ class Model_User implements Model
 		}
 		return $ret;
 	}
-	
+
+    /**
+     * return un tableau contenant tous les utilisateurs exepté l'admin
+     */
+    public static function loadAll() {
+        $ret=null;
+        $res = App_Mysql::getInstance()->query("SELECT * FROM Personne WHERE droit <= 1 ORDER BY droit ASC, nom ASC, prenom ASC");
+        $i=0;
+        while($tuple = App_Mysql::getInstance()->fetchArray($res)) {
+            $ret[$i]= new self($tuple["identifiant"],$tuple["email"],$tuple["nom"],$tuple["prenom"],$tuple["mdp"],$tuple["droit"]);
+            $i++;
+        }
+        return $ret;
+    }
+
 	public function getId(){ return $this->id; }
 	public function getEmail(){ return $this->email; }
 	public function getNom(){ return $this->nom; }
 	public function getPrenom(){ return $this->prenom; }
 	public function getMdp(){ return $this->mdp; }
 	public function getType(){ return $this->type; }
+    public function getStatus(){
+        if ($this->type == 0) {
+            return "Etudiant";
+        } else if ($this->type == 1) {
+            return "Professeur";
+        } else if ($this->type == 2) {
+            return "Administrateur";
+        }
+    }
 	
 	public function setId($s){ $this->id=$s; }
 	public function setEmail($s){ $this->email=$s; }
