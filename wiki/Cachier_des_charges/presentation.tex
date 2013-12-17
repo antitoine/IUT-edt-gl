@@ -109,18 +109,19 @@ Pour s'identifier sur le système l'utilisateur « Étudiant » doit utiliser so
         \item Son prénom
         \item Son numéro ARPEGE, qui est l'identifiant de chaque professeur à l'UM2
         \item Son adresse mail institutionnel
-        \item Ses matières enseignées
-        \item Son domaine de recherche si c'est un enseignant chercheur
+        %\item Ses matières enseignées
+        %\item Son domaine de recherche si c'est un enseignant chercheur
         \item Son mot de passe personnel
-        \item Ses contraintes personnelles
+        %\item Ses contraintes personnelles
         \end{itemize}
-Pour s'identifier sur le système l'utilisateur «Professeur» doit utiliser son numéro ARPEGE et son mot de passe.\\Les contraintes d'un professeur permettent aux créateurs et modificateurs de prendre en comptes les requêtes demandées par ces derniers.\\Il peut aussi ajouter dans les contraintes ses missions de recherche.
+Pour s'identifier sur le système l'utilisateur «Professeur» doit utiliser son numéro ARPEGE et son mot de passe.\\
+%Les contraintes d'un professeur permettent aux créateurs et modificateurs de prendre en comptes les requêtes demandées par ces derniers.\\Il peut aussi ajouter dans les contraintes ses missions de recherche.
 \\Un « Administrateur » est l'intervenant principal du système. Cet utilisateur comporte les informations suivantes :
         \begin{itemize}
         \item Son nom
         \item Son prénom
         \item Son identifiant
-        \item Son adresse mail de contacte
+        \item Son adresse mail de contact
         \item Son mot de passe personnel
         \end{itemize}
 Pour s'identifier sur le système l'utilisateur «Administrateur» doit utiliser son identifiant et son mot de passe choisie au préalable.\\Cet utilisateur a la possibilité de donner ou de retirer le droit de modification et de création à des utilisateurs de type « Professeur ». Ce droit permet donc d'ajouter des cours ou des conférences dans un emploi du temps, mais aussi modifier un module déjà présent.\\L'administrateur est la clé du système en cas de perte ou de vol de mot de passe d'un utilisateur, il est le seul à pouvoir le changer.\\Il peut aussi ajouter ou supprimer un utilisateur.
@@ -144,7 +145,7 @@ Pour s'identifier sur le système l'utilisateur «Administrateur» doit utiliser
         \end{figure}
         \begin{itemize}
         \item Consulter un emploi du temps : Détail figure 3
-        \item Gérer son espace utilisateur : Détail figure 2
+        \item Changer ses informations     : Détail figure 2
         \item Modifier un emploi du temps  : Détail figure 4
         \item Gérer les utilisateur        : Détail figure 5
         \item Se connecter                 : Détail figure 1
@@ -160,17 +161,27 @@ Pour s'identifier sur le système l'utilisateur «Administrateur» doit utiliser
         \label{fig-diag-use-case-1}
         \end{figure}
 	%
-        \begin{figure}[h]
-        \shadowbox{\large\bf\includegraphics[width=15cm]{fig-diag-use-case-2.eps}}
-        \caption{Figure Use Case 2 - Gérer son espace utilisateur}
-        \label{fig-diag-use-case-2}
+	\begin{figure}[h]
+        \shadowbox{\large\bf\includegraphics[width=15cm]{fig-diag-use-case-2-2.eps}}
+        \caption{Figure Use Case 2 - Changer ses informations}
+        \label{fig-diag-use-case-2-2}
         \end{figure}
-        \begin{itemize}
-        %\item Gérer ses préférences : Détail figure 2-1
-        \item Changer ses informations : Détail figure 2-2
+	\begin{itemize}
+        \item Modifier son mot de passe : Détail figure 2-1
+        \item Modifier son adresse email de contacte : Détail figure 2-2
         \end{itemize}
+	%
+        %\begin{figure}[h]
+        %\shadowbox{\large\bf\includegraphics[width=15cm]{fig-diag-use-case-2.eps}}
+        %\caption{Figure Use Case 2 - Gérer son espace utilisateur}
+        %\label{fig-diag-use-case-2}
+        %\end{figure}
+        %\begin{itemize}
+        %\item Gérer ses préférences : Détail figure 2-1
+        %\item Changer ses informations : Détail figure 2-2
+        %\end{itemize}
         %
-        \clearpage
+        %\clearpage
         %
         \begin{figure}[h]
         \shadowbox{\large\bf\includegraphics[width=15cm]{fig-diag-use-case-3.eps}}
@@ -194,7 +205,7 @@ Pour s'identifier sur le système l'utilisateur «Administrateur» doit utiliser
         \item Modifier un créneau : Détail figure 4-3
         \end{itemize}
         %
-        \clearpage
+        %\clearpage
         %
 	\begin{figure}[h]
         \shadowbox{\large\bf\includegraphics[width=15cm]{fig-diag-use-case-5.eps}}
@@ -226,6 +237,20 @@ Pour s'identifier sur le système l'utilisateur «Administrateur» doit utiliser
 	%
         \subsubsection{ Diagrammes de niveau 2}
         %
+	\begin{figure}[h]
+        \shadowbox{\large\bf\includegraphics[width=15cm]{fig-diag-use-case-2-2-1.eps}}
+        \caption{Figure Use Case 2.1 - Modifier son mot de passe}
+        \label{fig-diag-use-case-2-2-1}
+        \end{figure}
+	%
+	\begin{figure}[h]
+        \shadowbox{\large\bf\includegraphics[width=15cm]{fig-diag-use-case-2-2-2.eps}}
+        \caption{Figure Use Case 2.2 - Modifier son adresse email de contact}
+        \label{fig-diag-use-case-2-2-2}
+        \end{figure}
+	%
+	\clearpage
+	%
         %\begin{figure}[h]
         %\shadowbox{\large\bf\includegraphics[width=15cm]{fig-diag-use-case-2-1.eps}}
         %\caption{Figure Use Case 2.1 - Gérer ses préférences}
@@ -237,17 +262,17 @@ Pour s'identifier sur le système l'utilisateur «Administrateur» doit utiliser
         %\end{itemize}
         %\clearpage
 	%
-	\begin{figure}[h]
-        \shadowbox{\large\bf\includegraphics[width=15cm]{fig-diag-use-case-2-2.eps}}
-        \caption{Figure Use Case 2.2 - Changer ses informations}
-        \label{fig-diag-use-case-2-2}
-        \end{figure}
-        \begin{itemize}
-        \item Modifier son mot de passe : Détail figure 2-2-1
-        \item Modifier son adresse email de contacte : Détail figure 2-2-2
-        \end{itemize}
+	%\begin{figure}[h]
+        %\shadowbox{\large\bf\includegraphics[width=15cm]{fig-diag-use-case-2-2.eps}}
+        %\caption{Figure Use Case 2.2 - Changer ses informations}
+        %\label{fig-diag-use-case-2-2}
+        %\end{figure}
+        %\begin{itemize}
+        %\item Modifier son mot de passe : Détail figure 2-2-1
+        %\item Modifier son adresse email de contacte : Détail figure 2-2-2
+        %\end{itemize}
         %
-        \clearpage
+        %\clearpage
 	%
 	%\begin{figure}[h]
         %\shadowbox{\large\bf\includegraphics[width=15cm]{fig-diag-use-case-3-1.eps}}
@@ -265,7 +290,7 @@ Pour s'identifier sur le système l'utilisateur «Administrateur» doit utiliser
         \label{fig-diag-use-case-3-2}
         \end{figure}
 	%
-	\clearpage
+	%\clearpage
 	%
 	%\begin{figure}[h]
         %\shadowbox{\large\bf\includegraphics[width=15cm]{fig-diag-use-case-3-3.eps}}
@@ -333,19 +358,19 @@ Pour s'identifier sur le système l'utilisateur «Administrateur» doit utiliser
         %
 	%\clearpage
 	%
-	\begin{figure}[h]
-        \shadowbox{\large\bf\includegraphics[width=15cm]{fig-diag-use-case-2-2-1.eps}}
-        \caption{Figure Use Case 2.2.1 - Modifier son mot de passe}
-        \label{fig-diag-use-case-2-2-1}
-        \end{figure}
+	%\begin{figure}[h]
+        %\shadowbox{\large\bf\includegraphics[width=15cm]{fig-diag-use-case-2-2-1.eps}}
+        %\caption{Figure Use Case 2.2.1 - Modifier son mot de passe}
+        %\label{fig-diag-use-case-2-2-1}
+        %\end{figure}
 	%
-	\begin{figure}[h]
-        \shadowbox{\large\bf\includegraphics[width=15cm]{fig-diag-use-case-2-2-2.eps}}
-        \caption{Figure Use Case 2.2.2 - Modifier son adresse email de contacte}
-        \label{fig-diag-use-case-2-2-2}
-        \end{figure}
+	%\begin{figure}[h]
+        %\shadowbox{\large\bf\includegraphics[width=15cm]{fig-diag-use-case-2-2-2.eps}}
+        %\caption{Figure Use Case 2.2.2 - Modifier son adresse email de contact}
+        %\label{fig-diag-use-case-2-2-2}
+        %\end{figure}
 	%
-	\clearpage
+	%\clearpage
 	%
 	%\begin{figure}[h]
         %\shadowbox{\large\bf\includegraphics[width=15cm]{fig-diag-use-case-3-1-2.eps}}
@@ -517,12 +542,12 @@ Pour s'identifier sur le système l'utilisateur «Administrateur» doit utiliser
 			\item Sortie : Page d'erreur de connexion ou page d'accueil
 			\item Dépendances : Aucune
 		\end{itemize}
-		\item Gérer son espace utilisateur
-		\begin{itemize}
-			\item Entrée : Aucune
-			\item Sortie : Page d'erreur si non connecté ou page de modification
-			\item Dépendances : Être connecté
-		\end{itemize}
+		%\item Gérer son espace utilisateur
+		%\begin{itemize}
+			%\item Entrée : Aucune
+			%\item Sortie : Page d'erreur si non connecté ou page de modification
+			%\item Dépendances : Être connecté
+		%\end{itemize}
 		\item Consulter un emploi du temps
 		\begin{itemize}
 			\item Entrée : Emploi du temps choisi
@@ -553,19 +578,19 @@ Pour s'identifier sur le système l'utilisateur «Administrateur» doit utiliser
 			\item Sortie : Page d'erreur si non connecté ou page de resultat
 			\item Dépendances : Être connecté
 		\end{itemize}
-		\item Chercher un emploi du temps
-		\begin{itemize}
-			\item Entrée : Critères de recherche
-			\item Sortie : Page d'erreur si non connecté ou page de resultat
-			\item Dépendances : Être connecté
-		\end{itemize}
+		%\item Chercher un emploi du temps
+		%\begin{itemize}
+			%\item Entrée : Critères de recherche
+			%\item Sortie : Page d'erreur si non connecté ou page de resultat
+			%\item Dépendances : Être connecté
+		%\end{itemize}
 	\end{itemize}
         %
         \section{ Autres exigences}
         %
         \subsection{Exigences de performance}
         %
-        Le site doit répondre vide aux demandes, donc nos requêtes doivent être rapide à traiter. De plus il faut que notre système soit capable de gérer plusieurs utilisateurs en lecture, et un seul utilisateur en écriture en même temps.
+        Le site doit répondre vite aux demandes, donc nos requêtes doivent être rapide à traiter. De plus il faut que notre système soit capable de gérer plusieurs utilisateurs en lecture, et un seul utilisateur en écriture en même temps.
         %
         \subsection{ Exigences logique de la base de données}
         %
