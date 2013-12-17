@@ -36,7 +36,7 @@
                             <option value="">Séléctionnez un professeur</option>
                             <?php if (isset($var["listProf"])):
                                 for($i=0;$i<count($var["listProf"]["id"]);$i++): ?>
-                                    <option <?php if ($var["prof"] == $var["listProf"]["id"][$i]): ?>selected="selected"<?php endif ?> value="<?php echo $i ?>"><?php echo $var["listProf"]["id"][$i]." (".$var["listProf"]["nom"][$i]." ".$var["listProf"]["prenom"][$i].")" ?></option>
+                                    <option <?php if ($var["prof"] == $var["listProf"]["id"][$i]): ?>selected="selected"<?php endif ?> value="<?php echo $var["listProf"]["id"][$i] ?>"><?php echo $var["listProf"]["id"][$i]." (".$var["listProf"]["nom"][$i]." ".$var["listProf"]["prenom"][$i].")" ?></option>
                                 <?php endfor ?>
                             <?php endif ?>
                         </select>
@@ -50,7 +50,7 @@
                         <option value="">Séléctionnez un groupe de TD</option>
                         <?php if (isset($var["listGroup"])):
                             for($i=0;$i<count($var["listGroup"]);$i++): ?>
-                                <option <?php if ($var["grptd"] == $var["listGroup"][$i]): ?>selected="selected"<?php endif ?> value="<?php echo $i ?>"><?php echo $var["listGroup"][$i] ?></option>
+                                <option <?php if ($var["grptd"] == $var["listGroup"][$i]): ?>selected="selected"<?php endif ?> value="<?php echo $var["listGroup"][$i] ?>"><?php echo $var["listGroup"][$i] ?></option>
                             <?php endfor ?>
                         <?php endif ?>
                     </select>
