@@ -79,7 +79,6 @@ class Model_Cours implements Model
 	 * @return Ambigous <NULL, Model_Cours>
 	 * retourne: l'instance de cours identifié par $id dans la base de données si elle existe, sinn retourne  null 
 	 */
-    
     public static function load($id) {
         $ret=null;
         $res = App_Mysql::getInstance()->query("SELECT * FROM cours WHERE idCours='".App_Mysql::getInstance()->quote($id)."'");
@@ -88,6 +87,11 @@ class Model_Cours implements Model
         }
         return $ret;
     }
+
+    public static function remove($id) {
+        App_Mysql::getInstance()->query("DELETE FROM cours WHERE idCours='".App_Mysql::getInstance()->quote($id)."'");
+    }
+
 	/**
 	 * Retourne un tableau de toutes les instances de cours qui sont dans la base de données
 	 */
@@ -101,6 +105,21 @@ class Model_Cours implements Model
         }
         return $ret;
     }
+
+    /**
+     * Retourne un tableau de toutes les instances de cours qui sont dans la base de données
+     */
+    public static function loadAllWhithoutLimit() {
+        $ret=null;
+        $res = App_Mysql::getInstance()->query("SELECT * FROM cours ORDER BY Date DESC");
+        $i=0;
+        while($tuple = App_Mysql::getInstance()->fetchArray($res)) {
+            $ret[$i]=new Model_Cours($tuple["idCours"],$tuple["idProf"],$tuple["nomMatiere"],$tuple["Groupe"],$tuple["numeroSalle"],$tuple["nomBat"],$tuple["heureDebut"],$tuple["heureFin"],$tuple["Date"],$tuple["descriptionCours"]);
+            $i++;
+        }
+        return $ret;
+    }
+
 	/**
 	 * 
 	 * @param int $idProf

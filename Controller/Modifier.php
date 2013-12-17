@@ -27,7 +27,7 @@ class Controller_Modifier implements Controller
                 $var["listGroup"] = $listGroup;
             }
             if ($var["not_prof"]) {
-                $listCours = Model_Cours::loadAll();
+                $listCours = Model_Cours::loadAllWhithoutLimit();
                 if (!is_null($listCours)) {
                     $var["listCours"] = $listCours;
                 }
@@ -43,9 +43,10 @@ class Controller_Modifier implements Controller
             }
             $add_cours = App_Request::getParam("add_cours");
             $modifier_cours = App_Request::getParam("modifier_cours");
+            $supprimer_cours = App_Request::getParam("supprimer_cours");
             if (!empty($add_cours)) {
                 if ($this->ajoutCours($var)) {
-                    $view = new App_View('ajout_cours_reussi.php');
+                    $view = new App_View('modification_succes.php');
                     $view->render($var);
                 } else {
                     $var["prob_ajout"] = true;
@@ -53,9 +54,11 @@ class Controller_Modifier implements Controller
                     $view->render($var);
                 }
             } else if (!empty($modifier_cours)) {
-                $cours = App_Request::getParam("cours");
-                if (!empty($cours)) {
-                    $cours = $var["listCours"][App_Request::getParam("cours")];
+                $id_cours = App_Request::getParam("cours");
+                if (!is_null($id_cours)) {
+                    $cours = Model_Cours::load($id_cours);
+                }
+                if (isset($cours) && !empty($cours)) {
                     $var["idCours"] = $cours->getIdCours();
                     $var["date"] = $cours->getDate();
                     $var["heured"] = $cours->getHeureDebut();
@@ -71,6 +74,14 @@ class Controller_Modifier implements Controller
                     $view = new App_View('modifier_cours.php');
                     $view->render($var);
                 }
+            } else if (!empty($supprimer_cours)) {
+                $id_cours = App_Request::getParam("cours");
+                $cours = Model_Cours::load($id_cours);
+                if (!is_null($cours)) {
+                    Model_Cours::remove($id_cours);
+                }
+                $view = new App_View('modification_succes.php');
+                $view->render($var);
             } else {
                 $view = new App_View('modifier_cours.php');
                 $view->render($var);
@@ -91,14 +102,11 @@ class Controller_Modifier implements Controller
             $nomBat = $var["listSalle"]["nomBat"][App_Request::getParam("salle")];
         }
         if ($var["not_prof"]) {
-            $idprof = $var["listProf"]["id"][App_Request::getParam("prof")];
+            $idprof = App_Request::getParam("prof");
         } else {
             $idprof = $var["user"]->getId();
         }
         $groupe = App_Request::getParam("grptd");
-        if (!empty($groupe)) {
-            $groupe = $var["listGroup"][App_Request::getParam("grptd")];
-        }
         $matiere = App_Request::getParam("matiere");
         $description = trim(App_Request::getParam("description"));
         if (isset($date) && isset($heured) && isset($heuref)
@@ -136,14 +144,11 @@ class Controller_Modifier implements Controller
             $nomBat = $var["listSalle"]["nomBat"][App_Request::getParam("salle")];
         }
         if ($var["not_prof"]) {
-            $idprof = $var["listProf"]["id"][App_Request::getParam("prof")];
+            $idprof = App_Request::getParam("prof");
         } else {
             $idprof = $var["user"]->getId();
         }
         $groupe = App_Request::getParam("grptd");
-        if (!empty($groupe)) {
-            $groupe = $var["listGroup"][App_Request::getParam("grptd")];
-        }
         $matiere = App_Request::getParam("matiere");
         $description = trim(App_Request::getParam("description"));
         if (isset($idCours) && isset($date) && isset($heured) && isset($heuref)
@@ -200,7 +205,7 @@ class Controller_Modifier implements Controller
                 $var["listMatiere"] = $listMatiere;
             }
             if ($this->modifierCours($var)) {
-                $view = new App_View('ajout_cours_reussi.php');
+                $view = new App_View('modification_succes.php');
                 $view->render($var);
             } else {
                 $var["prob_modification"] = true;

@@ -36,7 +36,7 @@
                             <option value="">Séléctionnez un professeur</option>
                             <?php if (isset($var["listProf"])):
                                 for($i=0;$i<count($var["listProf"]["id"]);$i++): ?>
-                                    <option value="<?php echo $i ?>"><?php echo $var["listProf"]["id"][$i]." (".$var["listProf"]["nom"][$i]." ".$var["listProf"]["prenom"][$i].")" ?></option>
+                                    <option value="<?php echo $var["listProf"]["id"][$i] ?>"><?php echo $var["listProf"]["id"][$i]." (".$var["listProf"]["nom"][$i]." ".$var["listProf"]["prenom"][$i].")" ?></option>
                                 <?php endfor ?>
                             <?php endif ?>
                         </select>
@@ -50,7 +50,7 @@
                         <option value="">Séléctionnez un groupe de TD</option>
                         <?php if (isset($var["listGroup"])):
                             for($i=0;$i<count($var["listGroup"]);$i++): ?>
-                                <option value="<?php echo $i ?>"><?php echo $var["listGroup"][$i] ?></option>
+                                <option value="<?php echo $var["listGroup"][$i] ?>"><?php echo $var["listGroup"][$i] ?></option>
                             <?php endfor ?>
                         <?php endif ?>
                     </select>
@@ -79,7 +79,7 @@
         <form class ='formulaire-side-right' method='post' action="<?php echo App_Request::getUrl('modifier'); ?>">
             <fieldset>
                 <legend>Modifier un cours</legend>
-                <?php if (isset($var["prob_ajout"]) && $var["prob_ajout"]): ?>
+                <?php if (isset($var["prob_modification"]) && $var["prob_modification"]): ?>
                     <p class="probleme-form">Problème à la modification</p>
                 <?php endif ?>
                 <p>
@@ -88,7 +88,7 @@
                         <option value="">Séléctionnez un cours</option>
                         <?php if (isset($var["listCours"])):
                             for($i=0;$i<count($var["listCours"]);$i++): ?>
-                                <option value="<?php echo $i ?>"><?php echo $var["listCours"][$i]->getDate()." à ".$var["listCours"][$i]->getHeureDebut()." jusqu'à ".$var["listCours"][$i]->getHeureFin()." pour le ".$var["listCours"][$i]->getGroupe()." de ".$var["listCours"][$i]->getMatiere() ?></option>
+                                <option value="<?php echo $var["listCours"][$i]->getIdCours() ?>"><?php echo $var["listCours"][$i]->getDate()." à ".$var["listCours"][$i]->getHeureDebut()." jusqu'à ".$var["listCours"][$i]->getHeureFin()." pour le ".$var["listCours"][$i]->getGroupe()." de ".$var["listCours"][$i]->getMatiere() ?></option>
                             <?php endfor ?>
                         <?php endif ?>
                     </select>
@@ -96,6 +96,29 @@
                 <p>
                     <input type="hidden" value="ok" name="modifier_cours" id="modifier_cours" />
                     <input type='submit' value='Modifier' name='submit' id='submit' />
+                </p>
+            </fieldset>
+        </form>
+        <form class ='formulaire-side-right' method='post' action="<?php echo App_Request::getUrl('modifier'); ?>" onsubmit="return(confirm('Etes-vous sûr de vouloir supprimer ce cours ?'));">
+            <fieldset>
+                <legend>Supprimer un cours</legend>
+                <?php if (isset($var["prob_suppression"]) && $var["prob_suppression"]): ?>
+                    <p class="probleme-form">Problème à la suppresion</p>
+                <?php endif ?>
+                <p>
+                    <label for='cours'>Cours à supprimer :</label>
+                    <select name="cours">
+                        <option value="">Séléctionnez un cours</option>
+                        <?php if (isset($var["listCours"])):
+                            for($i=0;$i<count($var["listCours"]);$i++): ?>
+                                <option value="<?php echo $var["listCours"][$i]->getIdCours() ?>"><?php echo $var["listCours"][$i]->getDate()." à ".$var["listCours"][$i]->getHeureDebut()." jusqu'à ".$var["listCours"][$i]->getHeureFin()." pour le ".$var["listCours"][$i]->getGroupe()." de ".$var["listCours"][$i]->getMatiere() ?></option>
+                            <?php endfor ?>
+                        <?php endif ?>
+                    </select>
+                </p>
+                <p>
+                    <input type="hidden" value="ok" name="supprimer_cours" id="supprimer_cours" />
+                    <input type='submit' value='Supprimer' name='submit' id='submit' />
                 </p>
             </fieldset>
         </form>
