@@ -28,19 +28,21 @@ class Controller_Consultation implements Controller
         if (!is_null($listSalle)) {
             $var["listSalle"] = $listSalle;
         }
-        if (!empty(App_Request::getParam("envoi"))) {
+        $envoi = App_Request::getParam("envoi");
+        if (!empty($envoi)) {
             $listCours = null;
-            if (!empty(trim(App_Request::getParam("id_user")))) {
-                $id_user = trim(App_Request::getParam("id_user"));
+            $id_user = trim(App_Request::getParam("id_user"));
+            $nom = trim(App_Request::getParam("nom"));
+            $prenom = trim(App_Request::getParam("prenom"));
+            $grptd = trim(App_Request::getParam("grptd"));
+            $salle = App_Request::getParam("salle");
+            if (!empty($id_user)) {
                 $listCours = Model_EmploiDuTemps::searchByUser($id_user);
-            } else if (!empty(trim(App_Request::getParam("nom"))) && !empty(trim(App_Request::getParam("prenom")))) {
-                $nom = trim(App_Request::getParam("nom"));
-                $prenom = trim(App_Request::getParam("prenom"));
+            } else if (!empty($nom) && !empty($prenom)) {
                 $listCours = Model_EmploiDuTemps::searchByNomPrenom($nom,$prenom);
-            } else if (!empty(trim(App_Request::getParam("grptd")))) {
-                $grptd = trim(App_Request::getParam("grptd"));
+            } else if (!empty($grptd)) {
                 $listCours = Model_EmploiDuTemps::searchByGroupTD($grptd);
-            } else if (!empty(App_Request::getParam("salle"))) {
+            } else if (!empty($salle)) {
                 $salle = $var["listSalle"]["numeroSalle"][App_Request::getParam("salle")];
                 $bat = $var["listSalle"]["nomBat"][App_Request::getParam("salle")];
                 $listCours = Model_EmploiDuTemps::searchByBatimentSalle($bat,$salle);
