@@ -107,8 +107,12 @@ class Controller_Modifier implements Controller
             && !empty($date) && !empty($heured) && !empty($heuref)
             && !empty($numSalle) && !empty($nomBat) && !empty($idprof)
             && !empty($groupe) && !empty($matiere)) {
-            $newhoraire = new Model_Horaire($heured,$heuref,$date);
-            $newhoraire->save();
+            $tableIDHorraire = array ("heured" => $heured, "heuref" => $heuref, "date" => $date);
+            $horraire = Model_Horaire::load($tableIDHorraire);
+            if (is_null($horraire)) {
+                $newhoraire = new Model_Horaire($heured,$heuref,$date);
+                $newhoraire->save();
+            }
             $newCours = new Model_Cours(null,$idprof,$matiere,$groupe,$numSalle,$nomBat,$heured,$heuref,$date);
             if (isset($description)) {
                 $newCours->setDescription($description);
