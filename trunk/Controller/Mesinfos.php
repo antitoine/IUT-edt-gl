@@ -18,21 +18,30 @@ class Controller_Mesinfos implements Controller
 	{
         $send = App_Request::getParam("send");
 		if (!empty($send)) {
+            $oldmdp = trim(App_Request::getParam('oldmdp'));
             $mdp = trim(App_Request::getParam('mdp'));
-			if (!empty($mdp)) {
-                $var["user"]->setMdp(md5($mdp));
-			}
+            $confmdp = trim(App_Request::getParam('confmdp'));
             $email = trim(App_Request::getParam('email'));
-			if(!empty($email)){
-				$syntaxe="#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#";
-				if(preg_match($syntaxe,$email)){
-                    $var["user"]->setEmail($email);
-					$var["email"]=$email;
-				}
-			}
-            $var["user"]->save();
-			$view = new App_View('mesinfos.php');
-			$view->render($var);
+            $syntaxe="#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#";
+			if (!empty($mdp) && !empty($oldmdp) && !empty($confmdp)
+                && md5($oldmdp) == $var["user"]->getMdp()
+                && $mdp == $confmdp) {
+                $var["user"]->setMdp(md5($mdp));
+                $var["user"]->save();
+                $var["modification_succes"] = true;
+                $view = new App_View('mesinfos.php');
+                $view->render($var);
+			} else if(!empty($email) && preg_match($syntaxe,$email)){
+                $var["user"]->setEmail($email);
+                $var["user"]->save();
+                $var["modification_succes"] = true;
+                $view = new App_View('mesinfos.php');
+                $view->render($var);
+			} else {
+                $var["modification_succes"] = false;
+                $view = new App_View('mesinfos.php');
+                $view->render($var);
+            }
 		} else {
             $view = new App_View('mesinfos.php');
             $view->render($var);

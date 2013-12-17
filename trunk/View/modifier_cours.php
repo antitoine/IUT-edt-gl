@@ -1,5 +1,6 @@
 <?php include_once 'Templates/header.php'; ?>
     <div class="content">
+        <h3>Gestion des cours</h3>
         <form class ='formulaire-side-left' method='post' action="<?php echo App_Request::getUrl('modifier'); ?>">
             <fieldset>
                 <legend>Ajouter un cours</legend>
@@ -122,5 +123,6 @@
                 </p>
             </fieldset>
         </form>
+        <div class="formulaire-side-center"></div>
     </div>
 <?php include_once 'Templates/footer.php'; ?>
