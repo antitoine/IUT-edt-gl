@@ -25,7 +25,7 @@ class Model_Etudiant extends Model_User implements Model
 	public function save() {
         parent::save();
 		$res = App_Mysql::getInstance()->query("SELECT * FROM Etudiant WHERE idEtud='".App_Mysql::getInstance()->quote($this->id)."'");
-		if(!empty(App_Mysql::getInstance()->fetchArray($res))) {
+		if($tuple = App_Mysql::getInstance()->fetchArray($res)) {
 			App_Mysql::getInstance()->query("UPDATE Etudiant SET idGroupe='".mysql_real_escape_string($this->idGrp)."' WHERE idEtud='".$this->id."';");
 		}
 		else{
