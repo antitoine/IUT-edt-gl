@@ -22,6 +22,7 @@ class Controller_Mesinfos implements Controller
             $mdp = trim(App_Request::getParam('mdp'));
             $confmdp = trim(App_Request::getParam('confmdp'));
             $email = trim(App_Request::getParam('email'));
+            $confemail = trim(App_Request::getParam('confemail'));
             $syntaxe="#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#";
 			if (!empty($mdp) && !empty($oldmdp) && !empty($confmdp)
                 && md5($oldmdp) == $var["user"]->getMdp()
@@ -31,7 +32,7 @@ class Controller_Mesinfos implements Controller
                 $var["modification_succes"] = true;
                 $view = new App_View('mesinfos.php');
                 $view->render($var);
-			} else if(!empty($email) && preg_match($syntaxe,$email)){
+			} else if(!empty($email) && !empty($confemail) && $email == $confemail && preg_match($syntaxe,$email)){
                 $var["user"]->setEmail($email);
                 $var["user"]->save();
                 $var["modification_succes"] = true;
