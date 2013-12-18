@@ -45,6 +45,10 @@
                        <label for='email'>Nouvelle email :</label>
                        <input type='email' name='email' id='email' />
                     <p/>
+                    <p>
+                        <label for='confemail'>Confirmation nouvelle email :</label>
+                        <input type='confemail' name='confemail' id='confemail' />
+                    <p/>
                 </fieldset>
                 <p>
                     <input type="hidden" name="send" value="true" />
